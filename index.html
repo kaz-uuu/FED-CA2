@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrating SP 70</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
+    <link href="style.css" rel="stylesheet">
+
+</head>
+<body data-barba="wrapper">
+    <main data-barba="container" data-barba-namespace="landing">
+        <div class="wrapper">
+            <div class="col c-1">
+                <div class="item"><img src="./images/img1.png" alt=""></div>
+                <div class="item"><img src="./images/img2.png" alt=""></div>
+                <div class="item"><img src="./images/img3.png" alt=""></div>
+                <div class="item"><img src="./images/img4.png" alt=""></div>
+                <div class="item"><img src="./images/img5.png" alt=""></div>
+            </div>
+            <div class="col c-2">
+                <div class="item"><img src="./images/img1.png" alt=""></div>
+                <div class="item"><img src="./images/img2.png" alt=""></div>
+                <div class="item"><img src="./images/img3.png" alt=""></div>
+                <div class="item"><img src="./images/img4.png" alt=""></div>
+                <div class="item"><img src="./images/img5.png" alt=""></div>
+            </div>
+            <div class="col c-3">
+                <div class="item"><img src="./images/img1.png" alt=""></div>
+                <div class="item"><img src="./images/img2.png" alt=""></div>
+                <div class="item"><img src="./images/img5.png" alt=""></div>
+                <div class="item"><img src="./images/img3.png" alt=""></div>
+                <div class="item"><img src="./images/img4.png" alt=""></div>
+            </div>
+            <div class="col c-4">
+                <div class="item"><img src="./images/img1.png" alt=""></div>
+                <div class="item"><img src="./images/img2.png" alt=""></div>
+                <div class="item"><img src="./images/img3.png" alt=""></div>
+                <div class="item"><img src="./images/img4.png" alt=""></div>
+                <div class="item"><img src="./images/img5.png" alt=""></div>
+            </div>
+            <div class="col c-5">
+                <div class="item"><img src="./images/img1.png" alt=""></div>
+                <div class="item"><img src="./images/img2.png" alt=""></div>
+                <div class="item"><img src="./images/img3.png" alt=""></div>
+                <div class="item"><img src="./images/img4.png" alt=""></div>
+                <div class="item"><img src="./images/img5.png" alt=""></div>
+            </div>
+        </div>
+        <div class="content">
+            <nav>
+                <div class="nav-item">
+                    <a href="SP-in-70.html" id="active">SP in 70</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" id="active">Wish SP</a>
+                </div>
+            </nav>
+        </div>
+        <div class="hero">
+            <div class="title"><h1 class="display-3">Celebrating 70 Years of <span class="titleSP">Singapore Polytechnic</span></h1></div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script>
+        let tl = gsap.timeline({delay: 0})
+        
+        tl.to(".col", {
+            top: 0,
+            duration: 3,
+            ease: "power4.inOut"
+        })
+
+        tl.to('.c-1 .item', {
+            top: 0,
+            stagger: 0.25,
+            duration: 3,
+            ease: 'power4.inOut'
+        }, '-=2')
+
+        tl.to('.c-2 .item', {
+            top: 0,
+            stagger: -0.25,
+            duration: 3,
+            ease: 'power4.inOut'
+        }, '-=4')
+
+        tl.to('.c-3 .item', {
+            top: 0,
+            stagger: 0.25,
+            duration: 3,
+            ease: 'power4.inOut'
+        }, '-=4')
+
+        tl.to('.c-4 .item', {
+            top: 0,
+            stagger: -0.25,
+            duration: 3,
+            ease: 'power4.inOut'
+        }, '-=4')
+
+        tl.to('.c-5 .item', {
+            top: 0,
+            stagger: 0.25,
+            duration: 3,
+            ease: 'power4.inOut'
+        }, '-=4')
+
+        tl.to('.wrapper', {
+            scale: 6, 
+            duration: 4,
+            ease: 'power4.inOut'
+        },'-=2')
+
+        tl.to('.nav-item a, .title h1', {
+            top: 0,
+            stagger: 0.075,
+            duration: 1,
+            ease: 'power3.out'
+        },"-=1.5")
+
+        barba.init({
+            transitions: [{
+                name: 'opacity-transition',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                    opacity: 0
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0
+                    });
+                }
+            }]
+        });
+
+    </script>
+</body>
+</html>

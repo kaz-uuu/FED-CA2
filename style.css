@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Buch.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-LeichtKursiv.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-BuchKursiv.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/TestSohne-Dreiviertelfett.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/TestSohne-DreiviertelfettKursiv.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Extrafett.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-ExtrafettKursiv.otf') format('opentype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Extraleicht.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-ExtraleichtKursiv.otf') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Fett.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-FettKursiv.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Halbfett.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-HalbfettKursiv.otf') format('opentype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Kraftig.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-KraftigKursiv.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Leicht.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+	width: 100vw;
+	height: 100vh;
+	background: #141414;
+	font-family: "Sohne";
+}
+
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+
+}
+
+.content {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+
+}
+
+nav {
+	position: fixed;
+	width: 100%;
+	padding: 2.5em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 3em;
+
+}
+
+.nav-item {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.nav-item a {
+	position: relative;
+	top: 20px;
+	text-decoration: none;
+	color: white;
+	opacity: 0.5;
+}
+
+.nav-item a#active {
+	opacity: 1;
+
+}
+
+.hero {
+	position: absolute;
+	width: 95%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+	color: white;
+}
+
+.title {
+	flex: 2;
+	text-align: center;
+	clip-path: polygon( 0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.title h1 {
+	position: relative;
+	top: 80px;
+	font-weight: 700;
+}
+
+.titleSP {
+	color: #F6323F;
+}
+
+.wrapper {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	gap: 1em;
+
+}
+
+.wrapper .col {
+	position: relative;
+	flex: 1;
+	width: 100%;
+	flex-direction: column;
+	display: flex;
+	gap: 1em;
+}
+
+.col .item {
+	position: relative;
+	flex: 1;
+	width: 100%;
+	background: gray;
+	overflow: hidden;
+}
+
+.c-1, .c-3, .c-5 {
+	top: 100%;
+}
+
+.c-1 .item, .c-3 .item, .c-5 .item {
+	top: 100%
+}
+
+.c-2 .item, .c-4 .item {
+	top: -100%
+}
+
+@media(max-width: 900px) {
+}
+
