@@ -128,6 +128,7 @@ html, body {
 	height: 100vh;
 	background: #141414;
 	font-family: "Sohne";
+    color: white;
 }
 
 img {
@@ -153,7 +154,6 @@ nav {
 	justify-content: center;
 	align-items: center;
 	gap: 3em;
-
 }
 
 .nav-item {
@@ -239,5 +239,51 @@ nav {
 }
 
 @media(max-width: 900px) {
+}
+
+/* sp in 70 css */
+
+.gallery {
+    width: 60vw;
+    margin: auto;
+    position: relative;
+    padding-top: 10rem;
+}
+
+.timeline {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 20px;
+}
+
+.timeline h1 {
+    padding-right: 20px;
+}
+
+.timeline h1::after {
+    content: "";
+    position: relative;
+    width: 2px;
+    background-color: rgb(166, 166, 166);
+    height: calc(100%);
+    left: 50px;
+    display: block
+    /*
+    A pseudo class such as :before has a default display CSS property value of inline.
+
+Elements that are display: inline; and position: relative; are not "block-level" elements by default, and if they have no content, they do not take up any width. Thus, if you do not declare display: block; and you have an empty content declaration like content: "";, it will not take up any width at all in Scenario 1.
+
+Elements that are position: absolute; are taken out of flow and are "block-level" elements with a default display CSS property value of block. Because of this, Scenario 2 renders the :before pseudo element, honoring its width and height declarations.
+
+Scenario 3 is successful because the display property has been explicitly set to block, which honors the width and height declarations.
+
+You can see these default values being set by inspecting the :before element in your browser's web developer tools - see the tools' "elements" inspector.
+    */
+}
+
+@media(min-width: 900px) {
+    .timeline p {
+        padding-top: 3px;
+    }
 }
 

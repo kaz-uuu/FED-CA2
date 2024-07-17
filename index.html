@@ -11,17 +11,6 @@
 
 </head>
 <body data-barba="wrapper">
-    <nav>
-        <div class="nav-item">
-            <a href="" id="active">Home</a>
-        </div>
-        <div class="nav-item">
-            <a href="SP-in-70.html" id="active">SP in 70</a>
-        </div>
-        <div class="nav-item">
-            <a href="#" id="active">Wish SP</a>
-        </div>
-    </nav>
     <main data-barba="container" data-barba-namespace="landing">
         <div class="wrapper">
             <div class="col c-1">
@@ -61,6 +50,17 @@
             </div>
         </div>
         <div class="content">
+            <nav>
+                <div class="nav-item">
+                    <a href="" id="active">Home</a>
+                </div>
+                <div class="nav-item">
+                    <a href="SP-in-70.html" id="active">SP in 70</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" id="active">Wish SP</a>
+                </div>
+            </nav>
         </div>
         <div class="hero">
             <div class="title"><h1 class="display-3">Celebrating 70 Years of <span class="titleSP">Singapore Polytechnic</span></h1></div>
@@ -138,7 +138,6 @@
                     return gsap.from(data.next.container, {
                         opacity: 0
                     }).then(() => {
-                        console.log('why does this take so long')
                         landingAnimation();
                     });
                 }
