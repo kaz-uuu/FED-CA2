@@ -11,6 +11,17 @@
 
 </head>
 <body data-barba="wrapper">
+    <nav>
+        <div class="nav-item">
+            <a href="" id="active">Home</a>
+        </div>
+        <div class="nav-item">
+            <a href="SP-in-70.html" id="active">SP in 70</a>
+        </div>
+        <div class="nav-item">
+            <a href="#" id="active">Wish SP</a>
+        </div>
+    </nav>
     <main data-barba="container" data-barba-namespace="landing">
         <div class="wrapper">
             <div class="col c-1">
@@ -50,14 +61,6 @@
             </div>
         </div>
         <div class="content">
-            <nav>
-                <div class="nav-item">
-                    <a href="SP-in-70.html" id="active">SP in 70</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#" id="active">Wish SP</a>
-                </div>
-            </nav>
         </div>
         <div class="hero">
             <div class="title"><h1 class="display-3">Celebrating 70 Years of <span class="titleSP">Singapore Polytechnic</span></h1></div>
@@ -65,61 +68,63 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script>
-        let tl = gsap.timeline({delay: 0})
-        
-        tl.to(".col", {
-            top: 0,
-            duration: 3,
-            ease: "power4.inOut"
-        })
-
-        tl.to('.c-1 .item', {
-            top: 0,
-            stagger: 0.25,
-            duration: 3,
-            ease: 'power4.inOut'
-        }, '-=2')
-
-        tl.to('.c-2 .item', {
-            top: 0,
-            stagger: -0.25,
-            duration: 3,
-            ease: 'power4.inOut'
-        }, '-=4')
-
-        tl.to('.c-3 .item', {
-            top: 0,
-            stagger: 0.25,
-            duration: 3,
-            ease: 'power4.inOut'
-        }, '-=4')
-
-        tl.to('.c-4 .item', {
-            top: 0,
-            stagger: -0.25,
-            duration: 3,
-            ease: 'power4.inOut'
-        }, '-=4')
-
-        tl.to('.c-5 .item', {
-            top: 0,
-            stagger: 0.25,
-            duration: 3,
-            ease: 'power4.inOut'
-        }, '-=4')
-
-        tl.to('.wrapper', {
-            scale: 6, 
-            duration: 4,
-            ease: 'power4.inOut'
-        },'-=2')
-
-        tl.to('.nav-item a, .title h1', {
-            top: 0,
-            stagger: 0.075,
-            duration: 1,
-            ease: 'power3.out'
-        },"-=1.5")
+        function landingAnimation() {
+            let tl = gsap.timeline({delay: 0})
+            
+            tl.to(".col", {
+                top: 0,
+                duration: 3,
+                ease: "power4.inOut"
+            })
+    
+            tl.to('.c-1 .item', {
+                top: 0,
+                stagger: 0.25,
+                duration: 3,
+                ease: 'power4.inOut'
+            }, '-=2')
+    
+            tl.to('.c-2 .item', {
+                top: 0,
+                stagger: -0.25,
+                duration: 3,
+                ease: 'power4.inOut'
+            }, '-=4')
+    
+            tl.to('.c-3 .item', {
+                top: 0,
+                stagger: 0.25,
+                duration: 3,
+                ease: 'power4.inOut'
+            }, '-=4')
+    
+            tl.to('.c-4 .item', {
+                top: 0,
+                stagger: -0.25,
+                duration: 3,
+                ease: 'power4.inOut'
+            }, '-=4')
+    
+            tl.to('.c-5 .item', {
+                top: 0,
+                stagger: 0.25,
+                duration: 3,
+                ease: 'power4.inOut'
+            }, '-=4')
+    
+            tl.to('.wrapper', {
+                scale: 6, 
+                duration: 4,
+                ease: 'power4.inOut'
+            },'-=2')
+    
+            tl.to('.nav-item a, .title h1', {
+                top: 0,
+                stagger: 0.075,
+                duration: 1,
+                ease: 'power3.out'
+            },"-=1.5")
+        }
 
         barba.init({
             transitions: [{
@@ -132,11 +137,14 @@
                 enter(data) {
                     return gsap.from(data.next.container, {
                         opacity: 0
+                    }).then(() => {
+                        console.log('why does this take so long')
+                        landingAnimation();
                     });
                 }
             }]
         });
-
+        document.addEventListener('DOMContentLoaded', landingAnimation());
     </script>
 </body>
 </html>
