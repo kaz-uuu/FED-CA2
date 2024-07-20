@@ -323,7 +323,7 @@ export default function Timeline() {
                         pinSpacing: true,
                     },
                     height: '100%',
-                    duration: 2,
+                    duration: 2.5,
                     ease: 'power4.out'
                 })
         })

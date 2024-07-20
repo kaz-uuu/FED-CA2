@@ -7,6 +7,7 @@ import { ReactLenis } from "lenis/react";
 import Minimap from "../components/minimap";
 import Timeline from "../components/timeline";
 
+
 export default function SPin70() {
     const mainRef = useRef()
 
