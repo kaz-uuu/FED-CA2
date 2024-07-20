@@ -1,4 +1,3 @@
-import { withRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 
 const Minimap = ({ children }) => {
@@ -63,6 +62,8 @@ const Minimap = ({ children }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+
 
   return (
     <div
