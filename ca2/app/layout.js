@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { FirstVisitProvider } from "./visitContext";
 
 export const metadata = {
   title: "SP 70 | Celebrating 70 Years of Singapore Polytechnic",
@@ -10,7 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <FirstVisitProvider>
+        <body>{children}</body>
+      </FirstVisitProvider>
     </html>
   );
 }

@@ -134,7 +134,7 @@ html, body {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	z-index: 2;
+	z-index: 3;
 
 }
 
@@ -146,23 +146,25 @@ nav {
 	justify-content: center;
 	align-items: center;
 	gap: 3em;
+    z-index: 3;
 }
 
 .nav-item {
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
 
-.nav-item a {
-	position: relative;
-	top: 20px;
-	text-decoration: none;
+
+.nav-link {
+    text-decoration: none;
 	color: white;
-	opacity: 0.5;
+	opacity: 0.6;
+    top: 20px;
+    position: relative;
+    transition: opacity 0.5s;
 }
 
-.nav-item a#active {
+.nav-link#active {
 	opacity: 1;
-
 }
 
 .hero {
@@ -350,4 +352,14 @@ p{
 }
 
 
-/* Minimap */
+
+/* TRANSITIONs */
+
+.transition-element {
+    width: 0vw;
+    height: 100vh;
+    background-color: #141414;
+    z-index: 2;
+    position: absolute;
+    right: 0;
+}

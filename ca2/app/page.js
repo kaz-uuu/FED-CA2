@@ -1,8 +1,10 @@
 "use client"
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { TransitionLink } from "./components/transitionLink";
+import { useFirstVisit } from "./visitContext";
 
 //image imports
 import newSchoolImg from '../public/images/img1.png' 
@@ -13,17 +15,33 @@ import chanChunSingImg from '../public/images/img5.png'
 
 export default function Home() {
     gsap.registerPlugin(useGSAP)
+    const { isFirstVisit } = useFirstVisit()
     const main = useRef()
+    const [exitTimeline, setExitTimeline] = useState(null)
+
     useGSAP(() => {
-        let tl = gsap.timeline({delay: 0})
-        tl.to(".col", {top: 0, duration: 3, ease: "power4.inOut"})
-        tl.to('.c-1 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=2')
-        tl.to('.c-2 .item', {top: 0, stagger: -0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
-        tl.to('.c-3 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
-        tl.to('.c-4 .item', {top: 0, stagger: -0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
-        tl.to('.c-5 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
-        tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
-        tl.to('.nav-item a, .title h1', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
+        console.log(sessionStorage.getItem('firstVisit'))
+        if (isFirstVisit == null) {
+            let tl = gsap.timeline({delay: 0})
+            tl.to(".col", {top: 0, duration: 3, ease: "power4.inOut"})
+            tl.to('.c-1 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=2')
+            tl.to('.c-2 .item', {top: 0, stagger: -0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
+            tl.to('.c-3 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
+            tl.to('.c-4 .item', {top: 0, stagger: -0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
+            tl.to('.c-5 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
+            tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
+            tl.to('.nav-link, .title h1', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
+        } else {
+            gsap.to('.nav-link', {top: 0, duration: 0})
+            let tl = gsap.timeline({delay: 0})
+            tl.to(".col", {top: 0, duration: 0})
+            tl.to('.c-3 .item', {top: 0, duration: 0})
+            tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
+            tl.to('.title h1', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
+        }
+        let exitTl = gsap.timeline({ paused: true })
+        exitTl.to('.transition-element', {width: '100vw', duration: 1, ease: 'power4.out'})
+        setExitTimeline(exitTl)
     },{ scope: main })
     
     return (
@@ -68,19 +86,20 @@ export default function Home() {
             <div className="content">
                 <nav>
                     <div className="nav-item">
-                        <a href="" id="active">Home</a>
+                        <TransitionLink href={'/'} className="nav-link" id='active'>Home</TransitionLink>
                     </div>
                     <div className="nav-item">
-                        <a href="SP-in-70" id="active">SP in 70</a>
+                        <TransitionLink href={'/sp-in-70'} timeline={exitTimeline} className="nav-link">SP in 70</TransitionLink>
                     </div>
                     <div className="nav-item">
-                        <a href="#" id="active">Wish SP</a>
+                        <TransitionLink href={'/wish-sp'} timeline={exitTimeline} className="nav-link">Wish SP</TransitionLink>
                     </div>
                 </nav>
             </div>
             <div className="hero">
                 <div className="title"><h1 className="display-3">Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
             </div>
+            <div className="transition-element"></div>
         </main>
     );
 }
