@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 
-export const TransitionLink = ({ children, href, timeline, ...props }) => {
+export const TransitionLink = ({ children, href, timeline, destination, ...props }) => {
         const router = useRouter();
 
         const handleTransition = async (e) => {
@@ -14,8 +14,6 @@ export const TransitionLink = ({ children, href, timeline, ...props }) => {
                 if (timeline) {
                         await timeline.play().then(() => {
                                 router.push(href);
-                        }).then(() => {
-                                timeline.reverse();
                         });
                 } else {
                         router.push(href);
@@ -23,7 +21,7 @@ export const TransitionLink = ({ children, href, timeline, ...props }) => {
         };
 
         return (
-                <Link {...props} href={href} onClick={handleTransition} className="nav-link">
+                <Link {...props} href={href} onClick={handleTransition} className={`nav-link ${destination}`}>
                 {children}
         </Link>
         );

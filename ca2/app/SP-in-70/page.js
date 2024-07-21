@@ -6,17 +6,19 @@ import { useGSAP } from '@gsap/react';
 import { ReactLenis } from "lenis/react";
 import Minimap from "../components/minimap";
 import Timeline from "../components/timeline";
+import { useStateContext } from "../stateContext";
+import { Nav } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import { TransitionLink } from "../components/transitionLink";
-import { useFirstVisit } from "../visitContext";
 
 
 export default function SPin70() {
     const mainRef = useRef()
-    const { isFirstVisit } = useFirstVisit()
+    const { isFirstVisit } = useStateContext()
 
     gsap.registerPlugin(useGSAP)
     useGSAP(() => {
-        if (isFirstVisit == null) {
+        if (isFirstVisit) {
             gsap.to('.nav-link', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'})
         } else {
             gsap.to('.nav-link', {top: 0, duration: 0})
@@ -26,17 +28,23 @@ export default function SPin70() {
     return (
             <ReactLenis root options={{ lerp: 0., duration: 2, smoothTouch: true }}>
                 <main ref={ mainRef }>
-                    <nav>
-                        <div className="nav-item">
-                            <TransitionLink href={'/'} className="nav-link">Home</TransitionLink>
-                        </div>
-                        <div className="nav-item">
-                            <TransitionLink href={'/sp-in-70'}  className="nav-link" id='active'>SP in 70</TransitionLink>
-                        </div>
-                        <div className="nav-item">
-                            <TransitionLink href={'/wish-sp'}  className="nav-link">Wish SP</TransitionLink>
-                        </div>
-                    </nav>
+                    <Navbar>
+                        <Nav>
+                            <div className="nav-item">
+                                <TransitionLink href={'/'} destination='home-link'>Home</TransitionLink>
+                            </div>
+                        </Nav>
+                        <Nav>
+                            <div className="nav-item">
+                                <TransitionLink href={'/sp-in-70'}  id='active'  destination="sp-in-70-link">SP in 70</TransitionLink>
+                            </div>
+                        </Nav>
+                        <Nav>
+                            <div className="nav-item">
+                                <TransitionLink href={'/wish-sp'}  destination="wish-sp-link">Wish SP</TransitionLink>
+                            </div>
+                        </Nav>
+                    </Navbar>
                     <Minimap>
                         <div className="mini-gallery">
                             <Timeline />
