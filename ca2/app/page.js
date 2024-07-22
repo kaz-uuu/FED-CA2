@@ -105,22 +105,10 @@ export default function Home() {
                     <div className="item"><Image className="intro-img" src={chanChunSingImg} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/></div>
                 </div>
             </div>
-            <div className="content">
-                {/* <nav>
-                    <div className="nav-item">
-                        <TransitionLink href={'/'} className="nav-link" id='active'>Home</TransitionLink>
-                    </div>
-                    <div className="nav-item">
-                        <TransitionLink href={'/sp-in-70'} timeline={exitTimeline} className="nav-link">SP in 70</TransitionLink>
-                    </div>
-                    <div className="nav-item">
-                        <TransitionLink href={'/wish-sp'} timeline={exitTimeline} className="nav-link">Wish SP</TransitionLink>
-                    </div>
-                </nav> */}
-            </div>
             <div className="hero">
                 <div className="title"><h1 className="display-3">Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
             </div>
+            <div className="content"></div>
             <div className="transition-element"></div>
         </main>
     );
