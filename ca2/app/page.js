@@ -7,6 +7,8 @@ import { TransitionLink } from "./components/transitionLink";
 import { useStateContext } from "./stateContext";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
+import { Metadata } from 'next';
+
 
 //image imports
 import newSchoolImg from '../public/images/img1.png' 
@@ -105,10 +107,9 @@ export default function Home() {
                     <div className="item"><Image className="intro-img" src={chanChunSingImg} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/></div>
                 </div>
             </div>
-            <div className="hero">
-                <div className="title"><h1 className="display-3">Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
+            <div className="content">
+                    <div className="title"><h1 className="display-3">Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
             </div>
-            <div className="content"></div>
             <div className="transition-element"></div>
         </main>
     );
