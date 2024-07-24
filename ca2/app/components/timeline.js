@@ -3,85 +3,9 @@ import { useGSAP } from '@gsap/react'
 import { useEffect, useRef, useState } from 'react'
 import { Fragment } from 'react'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import { Info } from 'lucide-react'
 
 import Image from 'next/image';
-import img19541 from '../../public/images/timeline images/1954-1.jpg';
-import img19551 from '../../public/images/timeline images/1955-1.jpg';
-import img19561 from '../../public/images/timeline images/1956-1.jpg';
-import img19581 from '../../public/images/timeline images/1958-1.jpg';
-import img19591 from '../../public/images/timeline images/1959-1.jpg';
-import img19593 from '../../public/images/timeline images/1959-3.jpg';
-import img19594 from '../../public/images/timeline images/1959-4.jpg';
-import img19601 from '../../public/images/timeline images/1960-1.jpg';
-import img19611 from '../../public/images/timeline images/1961-1.jpg';
-import img19631 from '../../public/images/timeline images/1963-1.jpg';
-import img19632 from '../../public/images/timeline images/1963-2.jpg';
-import img19691 from '../../public/images/timeline images/1969-1.jpg';
-import img19692 from '../../public/images/timeline images/1969-2.jpg';
-import img19711 from '../../public/images/timeline images/1971-1.jpg';
-import img19712 from '../../public/images/timeline images/1971-2.jpg';
-import img19721 from '../../public/images/timeline images/1972-1.jpg';
-import img19731 from '../../public/images/timeline images/1973-1.jpg';
-import img19732 from '../../public/images/timeline images/1973-2.jpg';
-import img19741 from '../../public/images/timeline images/1974-1.jpg';
-import img19751 from '../../public/images/timeline images/1975-1.jpg';
-import img19781 from '../../public/images/timeline images/1978-1.jpg';
-import img19782 from '../../public/images/timeline images/1978-2.jpg';
-import img19791 from '../../public/images/timeline images/1979-1.jpg';
-import img19801 from '../../public/images/timeline images/1980-1.jpg';
-import img19821 from '../../public/images/timeline images/1982-1.jpg';
-import img19861 from '../../public/images/timeline images/1986-1.jpg';
-import img19862 from '../../public/images/timeline images/1986-2.jpg';
-import img19863 from '../../public/images/timeline images/1986-3.jpg';
-import img19881 from '../../public/images/timeline images/1988-1.jpg';
-import img19901 from '../../public/images/timeline images/1990-1.jpg';
-import img19902 from '../../public/images/timeline images/1990-2.jpg';
-import img19903 from '../../public/images/timeline images/1990-3.jpg';
-import img19911 from '../../public/images/timeline images/1991-1.jpg';
-import img19912 from '../../public/images/timeline images/1991-2.jpg';
-import img19921 from '../../public/images/timeline images/1992-1.jpg';
-import img19931 from '../../public/images/timeline images/1993-1.jpg';
-import img19941 from '../../public/images/timeline images/1994-1.jpg';
-import img19951 from '../../public/images/timeline images/1995-1.jpg';
-import img19971 from '../../public/images/timeline images/1997-1.jpg';
-import img19981 from '../../public/images/timeline images/1998-1.jpg';
-import img19991 from '../../public/images/timeline images/1999-1.jpg';
-import img19992 from '../../public/images/timeline images/1999-2.jpg';
-import img19993 from '../../public/images/timeline images/1999-3.jpg';
-import img20001 from '../../public/images/timeline images/2000-1.jpg';
-import img20002 from '../../public/images/timeline images/2000-2.jpg';
-import img20003 from '../../public/images/timeline images/2000-3.jpg';
-import img20004 from '../../public/images/timeline images/2000-4.jpg';
-import img20011 from '../../public/images/timeline images/2001-1.jpg';
-import img20021 from '../../public/images/timeline images/2002-1.jpg';
-import img20031 from '../../public/images/timeline images/2003-1.jpg';
-import img20032 from '../../public/images/timeline images/2003-2.jpg';
-import img20035 from '../../public/images/timeline images/2003-5.jpg';
-import img20042 from '../../public/images/timeline images/2004-2.jpg';
-import img20043 from '../../public/images/timeline images/2004-3.jpg';
-import img20051 from '../../public/images/timeline images/2005-1.jpg';
-import img20061 from '../../public/images/timeline images/2006-1.jpg';
-import img20071 from '../../public/images/timeline images/2007-1.jpg';
-import img20072 from '../../public/images/timeline images/2007-2.jpg';
-import img20073 from '../../public/images/timeline images/2007-3.jpg';
-import img20081 from '../../public/images/timeline images/2008-1.jpg';
-import img20082 from '../../public/images/timeline images/2008-2.jpg';
-import img20083 from '../../public/images/timeline images/2008-3.jpg';
-import img20091 from '../../public/images/timeline images/2009-1.jpg';
-import img20092 from '../../public/images/timeline images/2009-2.jpg';
-import img20093 from '../../public/images/timeline images/2009-3.jpg';
-import img20101 from '../../public/images/timeline images/2010-1.jpg';
-import img20102 from '../../public/images/timeline images/2010-2.jpg';
-import img20103 from '../../public/images/timeline images/2010-3.jpg';
-import img20111 from '../../public/images/timeline images/2011-1.jpg';
-import img20112 from '../../public/images/timeline images/2011-2.jpg';
-import img20121 from '../../public/images/timeline images/2012-1.jpg';
-import img20122 from '../../public/images/timeline images/2012-2.jpg';
-import img20131 from '../../public/images/timeline images/2013-1.jpg';
-import img20161 from '../../public/images/timeline images/2016-1.jpg';
-import img20201 from '../../public/images/timeline images/2020-1.jpg';
-import img20231 from '../../public/images/timeline images/2023-1.jpg';
-import img20232 from '../../public/images/timeline images/2023-2.jpg';
 
 export default function Timeline() {
     gsap.registerPlugin(ScrollTrigger);
@@ -530,17 +454,7 @@ export default function Timeline() {
         
         const timelineRef = useRef()
         const hoverImage = useRef()
-        const [imageSource, setImageSource] = useState(img19541)
-        const [imageWidth, setImageWidth] = useState(200)
-        const [imageHeight, setImageHeight] = useState(130)
-        const [hoveringImage, setHoveringImage] = useState(false)
-
-        const moveHoverImage = (event) => {
-                if (hoverImage.current) {
-                        hoverImage.current.style.left = `${event.clientX}px`;
-                        hoverImage.current.style.top = `${event.clientY}px`;
-                }
-        }
+        const [imageSource, setImageSource] = useState('/images/timeline images/1954-1.jpg')
 
         useGSAP(() => {
                 

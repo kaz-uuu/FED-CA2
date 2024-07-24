@@ -168,13 +168,11 @@ Nav {
     position: relative;
 }
 
-.content {
+.landing {
 	position: absolute;
 	width: 100%;
-	top: 50%;
-	left: 50%;
+
     height: fit-content;
-	transform: translate(-50%, -50%);
 	color: white;
 }
 
@@ -182,19 +180,28 @@ Nav {
     height: 100vh;
 }
 
-.section {
+
+
+.content {
     background-color: #141414;
     height: 1000px;
 }
 
 
-.title {
-	flex: 2;
+.title-wrapper {
 	text-align: center;
 	clip-path: polygon( 0 0, 100% 0, 100% 100%, 0% 100%);
+    position: absolute;
+    top: 50vh;
+    width: 100%;   
 }
 
-.title h1 {
+.title-wrapper-2 {
+    width: 100%;
+    height: 100%;
+}
+
+.title {
 	position: relative;
 	top: 80px;
 	font-weight: 700;
@@ -263,6 +270,7 @@ Nav {
     position: relative;
     padding-top: 10rem;
 }
+
 
 /* timeline stuff */
 

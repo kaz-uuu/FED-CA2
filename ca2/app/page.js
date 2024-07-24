@@ -8,6 +8,8 @@ import { useStateContext } from "./stateContext";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { Metadata } from 'next';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
+
 
 
 //image imports
@@ -19,6 +21,8 @@ import chanChunSingImg from '../public/images/img5.png'
 
 export default function Home() {
     gsap.registerPlugin(useGSAP)
+    gsap.registerPlugin(ScrollTrigger)
+
     const { isFirstVisit } = useStateContext()
     const main = useRef()
     const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
@@ -34,15 +38,29 @@ export default function Home() {
             tl.to('.c-4 .item', {top: 0, stagger: -0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
             tl.to('.c-5 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
             tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
-            tl.to('.nav-link, .title h1', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
+            tl.to('.nav-link, .title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
         } else {
             gsap.to('.nav-link', {top: 0, duration: 0})
             let tl = gsap.timeline({delay: 0})
             tl.to(".col", {top: 0, duration: 0})
             tl.to('.c-3 .item', {top: 0, duration: 0})
             tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
-            tl.to('.title h1', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
+            tl.to('.title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
         }
+
+        gsap.to('.title', {
+            scrollTrigger: {
+                trigger: '.title',
+                start: 'top center',
+                scrub: true,
+                pin: '.title-wrapper-2'
+            },
+            duration: 3,
+            scale: 10,
+            ease: 'power2.in',
+        })
+        
+
         let SPin70ExitTl = gsap.timeline({ paused: true })
         SPin70ExitTl.to('.transition-element', {width: '100vw', duration: 1, ease: 'power4.out'})
         SPin70ExitTl.to('.home-link', {opacity: 0.6, duration: 0.1, ease: 'power4.out'}, "<")
@@ -107,8 +125,13 @@ export default function Home() {
                     <div className="item"><Image className="intro-img" src={chanChunSingImg} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/></div>
                 </div>
             </div>
-            <div className="content">
-                    <div className="title"><h1 className="display-3">Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
+            <div className="title-wrapper-2">
+                <div className="title-wrapper"><h1 className="title">Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
+            </div>
+            <div className="landing">
+                <div className="hero">
+                </div>
+                <div className="content"></div>
             </div>
             <div className="transition-element"></div>
         </main>
