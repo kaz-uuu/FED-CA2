@@ -48,17 +48,6 @@ export default function Home() {
             tl.to('.title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
         }
 
-        gsap.to('.title', {
-            scrollTrigger: {
-                trigger: '.title',
-                start: 'top center',
-                scrub: true,
-                pin: '.title-wrapper-2'
-            },
-            duration: 3,
-            scale: 10,
-            ease: 'power2.in',
-        })
         
 
         let SPin70ExitTl = gsap.timeline({ paused: true })
