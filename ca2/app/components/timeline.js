@@ -475,32 +475,6 @@ export default function Timeline() {
                         console.log(timelineText.getAttribute('image-url'))
 
                         const imageURL = timelineText.getAttribute('image-url')
-                        // if (imageURL) {
-                        //         console.log('attribute fetched')
-                        //         timelineText.addEventListener('mouseenter', (event) => {
-                        //                 console.log('hover')
-                        //                 const imageURL = timelineText.getAttribute('image-url')
-                        //                 console.log(hoveringImage)
-                        //                 if (!hoveringImage) {
-                        //                         setHoveringImage(true)
-                        //                         setImageSource(`/images/timeline images/${imageURL}`)
-                        //                         gsap.to('.hover-image', {scale: 1, duration: 0, ease: 'power4.out'})
-                        //                 }
-                        //         }) 
-                        //         timelineText.addEventListener('mouseleave', (event) => {
-                        //                 setHoveringImage(false)
-                        //                 console.log("hovering image when mouse leave triggered ",hoveringImage)
-                        //                 gsap.to('.hover-image', {scale: 0, duration: 0, ease: 'power4.out'})
-                        //         }) 
-
-                        //         timelineText.addEventListener('mousemove', (event) => {
-                        //                 if (hoverImage.current) {
-                        //                         hoverImage.current.style.left = `${event.clientX}px`
-                        //                         hoverImage.current.style.top = `${event.clientY}px`
-                        //                 }
-                        //         })
-
-                        // }
                 })
 
                 const textWrappers = document.querySelectorAll('.timeline-text-wrapper')
