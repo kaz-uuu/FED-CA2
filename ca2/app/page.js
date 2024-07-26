@@ -36,7 +36,7 @@ export default function Home() {
         const title = useRef() // create a reference to manipulate title in animations hook
                 
         useGSAP(() => {
-                if (isFirstVisit) {
+                if (false) {
                         let tl = gsap.timeline({delay: 0})
                         tl.to(".col", {top: 0, duration: 3, ease: "power4.inOut"})
                         tl.to('.c-1 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=2')
@@ -84,6 +84,8 @@ export default function Home() {
 
                 // })
 
+
+
                 // Exiting to SP in 70 page animation timeline
                 let SPin70ExitTl = gsap.timeline({ paused: true })
                 SPin70ExitTl.to('.transition-element', {width: '100vw', duration: 1, ease: 'power4.out'})
@@ -95,7 +97,7 @@ export default function Home() {
 
         return (
                 <main /*className={styles.main}*/ ref={ main }>
-                <Navbar>
+               <Navbar>
                         <Nav>
                         <div className="nav-item">
                                 <TransitionLink href={'/'} id='active' destination='home-link'>Home</TransitionLink>
@@ -110,7 +112,7 @@ export default function Home() {
                         <div className="nav-item">
                                 <TransitionLink href={'/wish-sp'}  destination="wish-sp-link">Wish SP</TransitionLink>
                         </div>
-                        </Nav>
+                        </Nav> 
                 </Navbar>
                 <div className="wrapper">
                         <div className="col c-1">
@@ -153,15 +155,12 @@ export default function Home() {
                 </div>
                 <div className="landing">
                         <div className="title-wrapper"><h1 className="title" ref={title}>Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
-                        <div className="hero">
+                        <div className="herfo">
                         </div>
-                        <div className="clip-overlay">
-                                <div className="content is-loading">
-                                        
+                        <div className="content is-loading">
                                 <h2 className="description">What began in a humble five-storey building on Prince Edward Road grew into Singapore's largest polytechnic—a sprawling campus spanning 38 hectares of lush greenery and over 230,000 esteemed alumni. Our 70-year milestone in 2024 is a moment of reflection and celebration, but also the beginning of our next era, with more to discover and more to accomplish. This is SP at 70.</h2>
                                 <div className="image-container">
-                                        <Image src={spCampusImg} width={1720} height={1146} alt="SP Singapore Polytechnic Campus"/>
-                                </div>
+                                        {/* <Image src={spCampusImg} width={0} height={0} sizes="100vw" style={{ width: "100%", height: "auto" }} alt="SP Singapore Polytechnic Campus"/> */}
                                 </div>
                         </div>
                 </div>

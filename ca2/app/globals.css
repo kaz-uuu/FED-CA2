@@ -170,7 +170,7 @@ Nav {
 }
 
 .landing {
-	position: absolute;
+	position: relative;
 	width: 100%;
 	color: white;
         height: 100%;
@@ -178,17 +178,18 @@ Nav {
 
 .content {
         background-color: #141414;
-        height: 2000px;
+        height: 100vh;
         padding-left: 15vw;
         padding-right: 15vw;
-        padding-top: 140px;
+        padding-top: 40vh;
         position: relative;
-        top: 0;
+        top: 100vh;
+        z-index: 4;
+        width: 4000px;
 }
 
 
 .image-container {
-
 }
 
 /* .clip-overlay {
@@ -210,22 +211,18 @@ Nav {
 
 .description {
         margin: 20px;
-        text-align: center;
         font-weight: 400;
+        
 }
 
 .title-wrapper {
 	text-align: center;
 	clip-path: polygon( 0 0, 100% 0, 100% 100%, 0% 100%);
-        position: relative;
+        position: sticky;
         top: 48vh;
         width: 100%;   
 }
 
-.content-wrapper {
-        height: fit-content;
-        width: fit-content;
-}
 
 .title {
 	position: relative;
