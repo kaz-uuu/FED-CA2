@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "lucide-react": "^0.414.0"
+    "lucide-react": "^0.414.0",
+    "split-type": "^0.3.4"
   }
 }
