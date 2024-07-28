@@ -116,12 +116,10 @@
 }
 
 html, body {
-	width: 100vw;
-	height: 100vh;
 	background: #141414;
 	font-family: "Sohne";
     color: rgb(255, 255, 255);
-    overscroll-behavior: none;
+    overflow-x: hidden;
 }
 
 
@@ -177,42 +175,101 @@ Nav {
 }
 
 .content {
-        background-color: #141414;
-        height: 100vh;
-        padding-left: 15vw;
-        padding-right: 15vw;
-        padding-top: 40vh;
-        position: relative;
-        top: 100vh;
         z-index: 4;
-        width: 4000px;
+}
+
+.container {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 200%;
+        background-color: #141414;
+}
+
+.panel {
+    height: 100vh;
+    width: 100%;
+    background-color: #141414;
+}
+
+.panel Image {
+    object-fit: cover;
 }
 
 
-.image-container {
+.origin-panel {
+    display: flex;
+    align-items: center;
+    height: 100vh;
 }
 
-/* .clip-overlay {
-        --vert1: 50vw;
-        --vert2: 50vh;
-        --vert3: 50vw;
-        --vert4: 50vh;
-        --vert5: 50vw;
-        --vert6: 50vh;
-        --vert7: 50vw;
-        --vert8: 50vh;
-        clip-path: polygon(var(--vert1) var(--vert2), var(--vert3) var(--vert4), var(--vert5) var(--vert6), var(--vert7) var(--vert8));
-} */
+
+.origin {
+    display: grid;
+    grid-template-columns: 50vw auto 5vw min(500px, 100vw) 500px 500px 500px;
+    gap: 40px;
+    padding-left: 10vh;
+    align-items: center;
+}
 
 .hero {
-        height: 100vh;
-        width: 100vw;
+    height: 100vh;
 }
 
+.img-column {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: 100%;
+    width: 30vw;
+}
+
+.img-wrapper-1 {
+    position: relative;
+    flex: 1 0 0;
+    aspect-ratio: 860 / 573;
+}
+
+.img-wrapper-2 {
+    position: relative;
+    flex: 1 0 0;
+}
+
+.img-wrapper-2 {
+    position: relative;
+    flex: 1 0 0;
+}
+
+.img-wrapper-3 {
+    position: relative;
+    flex: 1 0 0;
+}
+
+
 .description {
-        margin: 20px;
+        font-size: clamp(16px, 2.5vw, 3vw);
         font-weight: 400;
-        
+
+}
+
+.rotated {
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
+    font-size: 3.8vw;
+    color: transparent;
+    -webkit-text-stroke: #ffffff 1px;
+    font-weight: 800;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 40px;
+}
+
+.section h1 {
+    font-size: clamp(22px, 2.5vw, 3vw);
 }
 
 .title-wrapper {
@@ -220,7 +277,7 @@ Nav {
 	clip-path: polygon( 0 0, 100% 0, 100% 100%, 0% 100%);
         position: sticky;
         top: 48vh;
-        width: 100%;   
+        width: 100%;    
 }
 
 
