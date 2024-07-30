@@ -178,16 +178,15 @@ Nav {
         z-index: 4;
 }
 
-.container {
+.horizontal-container {
         display: flex;
         flex-wrap: nowrap;
-        width: 200%;
+        width: fit-content;
         background-color: #141414;
 }
 
 .panel {
     height: 100vh;
-    width: 100%;
     background-color: #141414;
 }
 
@@ -205,7 +204,7 @@ Nav {
 
 .origin {
     display: grid;
-    grid-template-columns: 50vw auto 5vw min(500px, 100vw) 500px 500px 500px;
+    grid-template-columns: 50vw 30vw 5vw min(500px, 100vw) min(500px, 100vw) min(500px, 100vw);
     gap: 40px;
     padding-left: 10vh;
     align-items: center;
@@ -264,12 +263,18 @@ Nav {
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: center;
     gap: 40px;
 }
 
 .section h1 {
     font-size: clamp(22px, 2.5vw, 3vw);
+}
+
+.vertical-container {
+        width: 100vw;
+        height: 100vh;
+        background-color: #141414;
+        position: relative;
 }
 
 .title-wrapper {
@@ -450,19 +455,26 @@ img{
     width: 100%;
 }
 
-p{
-    font-size: clamp(1px, 2.2vw, 16px);
+p {
+    font-size: clamp(16px, 2.2vw, 3vw);
 }
 
+
+/* Book Sequence */
+
+#book-sequence {
+        position: relative;
+}
 
 
 /* TRANSITIONs */
 
 .transition-element {
     width: 0vw;
-    height: 100vh;
+    height: 500vh;
     background-color: #141414;
-    z-index: 2;
+    z-index: 4;
     position: absolute;
     right: 0;
+    top: 0;
 }

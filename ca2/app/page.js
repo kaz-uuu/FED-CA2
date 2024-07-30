@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { useStateContext } from "./stateContext";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
-import SimpleParallax from "simple-parallax-js";
 
+// component imports
+import BookSequence from "./components/booksequence";
 
 // animation related imports
 import gsap from 'gsap';
@@ -33,6 +34,8 @@ export default function Home() {
 
         const { isFirstVisit } = useStateContext()
         const main = useRef()
+        const horizontalContainer = useRef()
+        const origin = useRef()
         const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
         const title = useRef() // create a reference to manipulate title in animations hook
                 
@@ -63,10 +66,10 @@ export default function Home() {
                         xPercent: -100, // Move the single section to the left by 100%
                         ease: "none", // Important as it keeps the scrolling motion linear
                         scrollTrigger: {
-                          trigger: ".container",
+                          trigger: ".horizontal-container",
                           pin: true,
                           scrub: 0.1,
-                          end: () => "+=" + document.querySelector(".container").offsetWidth
+                          end: () => "+=" + document.querySelector(".horizontal-container").offsetWidth
                         }
                       });
 
@@ -77,6 +80,18 @@ export default function Home() {
                 SPin70ExitTl.to('.sp-in-70-link', {opacity: 1, duration: 0.3, ease: 'power4.out'},"<")
                 setSPin70ExitTl(SPin70ExitTl) // Timeline saved using useState hook to pass to the transition link component
         },{ scope: main })
+
+        useEffect(() => {
+                if (horizontalContainer && origin) {
+                        const { width } = origin.current.getBoundingClientRect()
+                        console.log('origin width: ', width)
+                        horizontalContainer.current.style.width =`${width}px`
+                        console.log(horizontalContainer.current.style.width)
+                }
+        })
+
+        
+
 
 
         return (
@@ -112,7 +127,6 @@ export default function Home() {
                         <div className="item"><Image className="intro-img" src={spStudentsImg} alt="SP Singapore Polytechnic Student Life"/></div>
                         <div className="item"><Image className="intro-img" src={spBusinessStudentsImg} alt="SP Singapore Polytechnic School of Business Student Life"/></div>
                         <div className="item"><Image className="intro-img" src={spGradStudentsImg} alt="SP Singapore Polytechnic Students Graduation"/></div>
-                        <div className="item"><Image className="intro-img" src={spSign2Img} alt="SP Singapore Polytechnic Student Life"/></div>
                         </div>
                         <div className="col c-3">
                         <div className="item"><Image className="intro-img"  src={spStudents2Img} alt="SP Singapore Polytechnic Student Life"/></div>
@@ -122,7 +136,6 @@ export default function Home() {
                         <div className="item"><Image className="intro-img" src={spSign2Img} alt="SP Singapore Polytechnic Student Life"/></div>
                         </div>
                         <div className="col c-4">
-                        <div className="item"><Image className="intro-img" src={chanChunSingImg} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/></div>
                         <div className="item"><Image className="intro-img"  src={spCampusImg} alt="SP Singapore Polytechnic Campus"/></div>
                         <div className="item"><Image className="intro-img" src={oldSchoolImg} alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/></div>
                         <div className="item"><Image className="intro-img" src={princeEdwardRoadCampusImg} alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/></div>
@@ -141,53 +154,52 @@ export default function Home() {
                 <div className="hero">
                 </div>
                 <div className="content is-loading">
-                        <div className="container">
+                        <div ref={horizontalContainer} className="horizontal-container">
                                 <div className="panel origin-panel">
-                                        <div className="origin">
+                                        <div ref={origin} className="origin">
                                                 <h2 className="description">What began in a humble five-storey building on Prince Edward Road grew into Singapore's largest polytechnic—a sprawling campus spanning 38 hectares of lush greenery and over 230,000 esteemed alumni. Our 70-year milestone in 2024 is a moment of reflection and celebration, but also the beginning of our next era, with more to discover and more to accomplish. This is SP at 70.</h2>
                                                 <div className="img-column">
                                                         <div className="img-wrapper-1">
-                                                               <Image className="school-img" fill src={princeEdwardRoadCampusImg} objectFit="cover"/>
+                                                               <Image className="school-img" fill src={princeEdwardRoadCampusImg} objectFit="cover" alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/>
                                                         </div>
                                                         <div className="img-wrapper-2">
-                                                                <Image className="school-img" fill src={spCampusImg} objectFit="cover"/>
+                                                                <Image className="school-img" fill src={spCampusImg} objectFit="cover" alt="SP Singapore Polytechnic Campus"/>
                                                         </div>
                                                 </div>
                                                 <h1 className="rotated">FUTURE READY  SP</h1>
 
                                                 <div className="section">
                                                         <h1>Personal/Work Life</h1>
-                                                        <div className="img-wrapper-3">
+                                                        {/* <div className="img-wrapper-3">
                                                                <Image className="school-img" fill src={princeEdwardRoadCampusImg} objectFit="cover"/>
-                                                        </div>
+                                                        </div> */}
                                                         <p>
                                                                 Personal and work life are undergoing fundamental change. Being globally connected is a key aspect of SP's “future-ready” DNA. This includes fostering curiosity about the rest of the world, in all its diversity. Such an international outlook also builds empathy with people of other cultures, which is a vital ingredient in most fields of work, along with the capacity to understand the needs of users and consumers, markets and audiences.
                                                         </p>
                                                 </div>
                                                 <div className="section">
                                                         <h1>Industry Disruptions</h1>
-                                                        <div className="img-wrapper-3">
+                                                        {/* <div className="img-wrapper-3">
                                                                <Image className="school-img" fill src={princeEdwardRoadCampusImg} objectFit="cover"/>
-                                                        </div>
+                                                        </div> */}
                                                         <p>
                                                                 The whole universe of industry has become much more disruptive, with game-changing developments in areas such as artificial intelligence (AI), machine learning, the Internet of Things (IoT), and robotics. To be future-ready, SP will need to embrace, and adapt to, change in industry – whether from technological advances or other shifts in the workplace. Anticipating the future is the only safeguard against the worst of disruption and displacement.
                                                         </p>
                                                 </div>
                                                 <div className="section">
                                                         <h1>Global Shifts</h1>
-                                                        <div className="img-wrapper-3">
+                                                        {/* <div className="img-wrapper-3">
                                                                <Image className="school-img" fill src={princeEdwardRoadCampusImg} objectFit="cover"/>
-                                                        </div>
+                                                        </div> */}
                                                         <p>
                                                                 Of all the global issues facing the world, for most people, climate change tops the list. This subject is huge too, at Singapore Polytechnic, as efforts to help students become more “future-ready” focus on addressing sustainability, always from a holistic, big-picture perspective. This commitment is most concrete in the Polytechnic’s Sustainable Innovation Project (SIP), one of the 10 modules of the Common Core Curriculum. This is a learning experience that culminates in a capstone project that students work on in their second year of study.
                                                         </p>
                                                 </div>
-                                                <h1 className="rotated">FOR ALL AGES</h1>
                                         </div>
-                                        
+                                        <BookSequence />
                                 </div>
-                                <div className="panel">
-                                </div>
+                        </div>
+                        <div className="vertical-container">
                         </div>
                 </div>
                 <div className="transition-element"></div>

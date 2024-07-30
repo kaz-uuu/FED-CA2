@@ -471,25 +471,19 @@ export default function Timeline() {
                         duration: 1,
                         ease: 'power4.out'
                         })
-                        console.log('fetching')
-                        console.log(timelineText.getAttribute('image-url'))
 
                         const imageURL = timelineText.getAttribute('image-url')
                 })
 
                 const textWrappers = document.querySelectorAll('.timeline-text-wrapper')
                 textWrappers.forEach((textWrapper) => {
-                        console.log(textWrapper.getAttribute('image-url'))
                         if (textWrapper.getAttribute('image-url')) {
-                                console.log('attribute fetched')
                                 textWrapper.addEventListener('mouseenter', (event) => {
-                                        console.log('hover')
                                         const imageURL = textWrapper.getAttribute('image-url')
                                         setImageSource(`/images/timeline images/${imageURL}`)
                                         gsap.to('.hover-image', {scale: 1, duration: 0.5, ease: 'power4.out'})
                                 }) 
                                 textWrapper.addEventListener('mouseleave', (event) => {
-                                        console.log('leave')
                                         const imageURL = event.target.getAttribute('image-url')
                                         gsap.to('.hover-image', {scale: 0, duration: 0.5, ease: 'power4.out'})
                                 }) 
