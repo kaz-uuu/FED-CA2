@@ -297,6 +297,26 @@ Nav {
 	color: #F6323F;
 }
 
+/* Book Sequence */
+
+#book-sequence {
+        position: relative;
+}
+
+
+.book-section {
+        margin-left: 40px;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+}
+
+.book-sequence {
+        flex: 1 0 0;
+}
+
 .wrapper {
 	position: fixed;
 	width: 100%;
@@ -456,14 +476,7 @@ img{
 }
 
 p {
-    font-size: clamp(16px, 2.2vw, 3vw);
-}
-
-
-/* Book Sequence */
-
-#book-sequence {
-        position: relative;
+    font-size: clamp(14px, 1vw, 1.5vw);
 }
 
 

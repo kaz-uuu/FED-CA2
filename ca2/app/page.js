@@ -196,7 +196,10 @@ export default function Home() {
                                                         </p>
                                                 </div>
                                         </div>
-                                        <BookSequence />
+                                        <div className="book-section"> 
+                                                <h1 className="rotated">FUTURE READY  SP</h1>
+                                                <BookSequence className='book-sequence' />
+                                        </div>
                                 </div>
                         </div>
                         <div className="vertical-container">
