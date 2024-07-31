@@ -181,7 +181,7 @@ Nav {
 .horizontal-container {
         display: flex;
         flex-wrap: nowrap;
-        width: fit-content;
+        width: calc(50vw + 30vw +5vw +min(500px, 100vw)+ min(500px, 100vw) +min(500px, 100vw) - 100vw);
         background-color: #141414;
 }
 
@@ -273,7 +273,7 @@ Nav {
 .vertical-container {
         width: 100vw;
         height: 100vh;
-        background-color: #141414;
+        background-color: #ff1e1e;
         position: relative;
 }
 
@@ -301,20 +301,50 @@ Nav {
 
 #book-sequence {
         position: relative;
+        margin: auto;
+        left: calc((100vw - 600px) / 2);
+        top: calc((100vh - 600px) / 2);
 }
 
 
 .book-section {
-        margin-left: 40px;
+        position: relative;
         width: 100vw;
         height: 100vh;
-        display: flex;
-        align-items: center;
-        flex-direction: row;
+
 }
 
-.book-sequence {
+.sequence-wrapper {
         flex: 1 0 0;
+}
+
+.book-title {
+    position: relative;
+    text-align: center;
+}
+
+.book-desc {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    align-content: center;
+    z-index: 2;
+    mix-blend-mode: difference;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.spacer {
+    width: 5vw;
+}
+
+.desc-text {
+    width: 50vw;
+    height: fit-content;
+    margin: auto;
+    text-align: center;
 }
 
 .wrapper {

@@ -61,17 +61,25 @@ export default function Home() {
                         tl.to('.landing', {transform: 'scaleY(1)', duration: 0},'<')
                 }
 
-
                 let scrollTween = gsap.to('.panel', {
                         xPercent: -100, // Move the single section to the left by 100%
                         ease: "none", // Important as it keeps the scrolling motion linear
                         scrollTrigger: {
-                          trigger: ".horizontal-container",
-                          pin: true,
-                          scrub: 0.1,
-                          end: () => "+=" + document.querySelector(".horizontal-container").offsetWidth
+                                trigger: ".horizontal-container",
+                                pin: true,
+                                scrub: 0.1,
+                                end: "+=5000"
                         }
-                      });
+                });
+
+                gsap.to('.book-section', {
+                        xPercent: 100,
+                        ease: 'none',
+                        scrollTrigger: {
+                                containerAnimation: scrollTween,
+                                start: 'left left'
+                        }
+                })
 
                 // Exiting to SP in 70 page animation timeline
                 let SPin70ExitTl = gsap.timeline({ paused: true })
@@ -81,14 +89,14 @@ export default function Home() {
                 setSPin70ExitTl(SPin70ExitTl) // Timeline saved using useState hook to pass to the transition link component
         },{ scope: main })
 
-        useEffect(() => {
-                if (horizontalContainer && origin) {
-                        const { width } = origin.current.getBoundingClientRect()
-                        console.log('origin width: ', width)
-                        horizontalContainer.current.style.width =`${width}px`
-                        console.log(horizontalContainer.current.style.width)
-                }
-        })
+        // useEffect(() => {
+        //         if (horizontalContainer && origin) {
+        //                 const { width } = origin.current.getBoundingClientRect()
+        //                 console.log('origin width: ', width)
+        //                 horizontalContainer.current.style.width =`${width}px`
+        //                 console.log(horizontalContainer.current.style.width)
+        //         }
+        // })
 
         
 
@@ -196,8 +204,12 @@ export default function Home() {
                                                         </p>
                                                 </div>
                                         </div>
-                                        <div className="book-section"> 
-                                                <h1 className="rotated">FUTURE READY  SP</h1>
+                                        <div className="book-section">
+                                                <div className="book-desc">
+                                                        <h1 className="rotated book-title">FOR ALL AGES</h1>
+                                                        <h1 className="desc-text">In celebration of SP's 70th anniversary, we have launched a commemorative book titled ‘For All Ages, Singapore Polytechnic At Seventy’, featuring some of the people and moments that have shaped us through the years.</h1>
+                                                        <div className="spacer"></div>
+                                                </div>
                                                 <BookSequence className='book-sequence' />
                                         </div>
                                 </div>
