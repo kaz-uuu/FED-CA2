@@ -9,9 +9,6 @@ const stateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const [isFirstVisit, setIsFirstVisit] = useState(true)
-  const [navBarTimeline, setNavBarTimeline] = useState(null)
-  const [isMainAnimationComplete, setIsMainAnimationComplete] = useState(false)
-  const [stopAnimating, setStopAnimating] = useState(false)
 
   useEffect(() => {
     // Check if the site has been visited before, and if it has, set it to false for future reference
@@ -20,16 +17,9 @@ export const StateContextProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (isMainAnimationComplete && navBarTimeline && !stopAnimating) {
-      navBarTimeline.play()
-      setStopAnimating(true)
-    }
-  }, [isMainAnimationComplete, navBarTimeline])
-
   return (
-    <stateContext.Provider value={{ isFirstVisit, setNavBarTimeline, setIsMainAnimationComplete }} > {/* Make the states accessible */}
-      {children}
+    <stateContext.Provider value={{ isFirstVisit }}>{/* Make the states accessible */}
+        {children}
     </stateContext.Provider>
   );
 };

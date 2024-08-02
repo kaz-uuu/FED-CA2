@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 const BookSequence = () => {
         const canvasRef = useRef(null);
-        const imgRef = useRef(new Image());
+        const imgRef = useRef(null);
         const frameCount = 189;
 
         const currentFrame = (index) => (
@@ -12,7 +12,8 @@ const BookSequence = () => {
         useEffect(() => {
                 const canvas = canvasRef.current;
                 const context = canvas.getContext('2d');
-                const img = imgRef.current;
+                const img = new Image();
+                imgRef.current = img
 
                 canvas.width = 600;
                 canvas.height = 600;

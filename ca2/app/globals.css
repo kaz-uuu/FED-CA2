@@ -137,7 +137,7 @@ Nav {
 	justify-content: center;
 	align-items: center;
 	gap: 3em;
-    z-index: 3;
+    z-index: 4;
 }
 
 .nav-item {
@@ -415,6 +415,7 @@ Nav {
     display: grid;
     grid-template-columns: min-content 1fr;
     gap: 40px;
+    margin-bottom: 100px;
 }
 
 .timeline p {
@@ -443,7 +444,7 @@ Nav {
 .line {
     width: 2px;
     background-color: rgba(120, 120, 120, 1);
-    height: 0%;
+    height: 100%;
     display: block;
     margin-left: 50%;
 }
@@ -516,8 +517,37 @@ p {
     width: 0vw;
     height: 500vh;
     background-color: #141414;
-    z-index: 4;
+    z-index: 3;
     position: absolute;
     right: 0;
     top: 0;
+}
+
+
+.header {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+.header h1 {
+        font-size: 12vw;
+        font-weight: 500;
+        letter-spacing: -0.05em;
+        line-height: 175%;
+        color: #793333;
+        text-align: center;
+}
+
+.wish-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        color: black;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 16px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 2;
 }

@@ -7,12 +7,12 @@ import { Navbar } from "react-bootstrap";
 
 // component imports
 import BookSequence from "./components/booksequence";
+import { TransitionLink } from "./components/transitionLink";
 
 // animation related imports
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
-import { TransitionLink } from "./components/transitionLink";
 import SplitType from "split-type";
 
 //image imports
@@ -33,7 +33,7 @@ export default function Home() {
         gsap.registerPlugin(ScrollTrigger)
 
         const { isFirstVisit } = useStateContext()
-        const main = useRef()
+        const mainRef = useRef()
         const horizontalContainer = useRef()
         const origin = useRef()
         const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
@@ -87,7 +87,7 @@ export default function Home() {
                 SPin70ExitTl.to('.home-link', {opacity: 0.6, duration: 0.1, ease: 'power4.out'}, "<")
                 SPin70ExitTl.to('.sp-in-70-link', {opacity: 1, duration: 0.3, ease: 'power4.out'},"<")
                 setSPin70ExitTl(SPin70ExitTl) // Timeline saved using useState hook to pass to the transition link component
-        },{ scope: main })
+        },{ scope: mainRef })
 
         // useEffect(() => {
         //         if (horizontalContainer && origin) {
@@ -103,7 +103,7 @@ export default function Home() {
 
 
         return (
-                <main /*className={styles.main}*/ ref={ main }>
+                <main /*className={styles.main}*/ ref={ mainRef }>
                <Navbar>
                         <Nav>
                         <div className="nav-item">
