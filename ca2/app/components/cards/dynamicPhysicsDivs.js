@@ -1,26 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
+import './dynamicPhysicsDivs.css';
 
-const { Engine, Render, Runner, World, Bodies, Body } = Matter;
+// Destructure required components from Matter.js
+const { Engine, Render, Runner, World, Bodies, Body, Vector } = Matter;
 
+// Array of wish messages and authors
 const wishMessages = [
-        { message: "Congratulations on 70 years of excellence!", author: "John Doe" },
-        { message: "Here's to 70 more years of innovation!", author: "Jane Smith" },
-        { message: "SP has shaped generations. Happy 70th!", author: "Alex Wong" },
-        { message: "Proud to be part of SP's legacy!", author: "Sarah Lee" },
-        { message: "70 years of creating future-ready graduates!", author: "Mike Chen" },
-        { message: "SP: Where passion meets purpose for 70 years!", author: "Emily Tan" },
-        // { message: "Celebrating 70 years of transforming lives!", author: "David Lim" },
-        // { message: "SP: 70 years young and still innovating!", author: "Rachel Ng" },
-        // { message: "Happy 70th! Thanks for the memories!", author: "Kevin Teo" },
-        // { message: "70 years of excellence, community, and growth!", author: "Lisa Goh" },
-        // { message: "Cheers to SP's platinum anniversary!", author: "Tom Baker" },
-        // { message: "I hope SP continues to survive!", author: "Irman" },
-        // { message: "I hope SP will achieve all their goals and renovate SOC block", author: "Oliver" },
-        // { message: "I wish SP would open an exclusive shuttle bus service for SOC students!", author: "Javier" },
+        { message: "Congratulations on 70 years of excellence!", author: "Kun Ming" },
+        { message: "Here's to 70 more years of innovation!", author: "Jane" },
+        { message: "SP has shaped generations. Happy 70th!", author: "Alex" },
+        { message: "Proud to be part of SP's legacy!", author: "Sarah" },
+        { message: "70 years of creating future-ready graduates!", author: "Mike" },
+        { message: "SP: Where passion meets purpose for 70 years!", author: "Emily" },
+        { message: "Celebrating 70 years of transforming lives!", author: "David" },
+        { message: "SP: 70 years young and still innovating!", author: "Rachel" },
+        { message: "Happy 70th! Thanks for the memories!", author: "Kevin" },
+        { message: "70 years of excellence, community, and growth!", author: "Lisa" },
+        { message: "Cheers to SP's platinum anniversary!", author: "Tom" },
+        { message: "I hope SP continues to survive!", author: "Irman" },
+        { message: "I hope SP will achieve all their goals and renovate SOC block", author: "Oliver" },
+        { message: "I wish SP would open an exclusive shuttle bus service for SOC students!", author: "Javier" },
 ];
 
-const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
+// Main component
+const DynamicPhysicsDivs = ({ cardCount }) => {
+        // Refs for accessing DOM elements and storing state
         const sceneRef = useRef(null);
         const engineRef = useRef(null);
         const renderRef = useRef(null);
@@ -34,54 +39,68 @@ const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
                 let lastMouseX = -1;
                 let lastMouseY = -1;
 
-                const vwToPixels = (vw) => {
-                        return (vw * window.innerWidth) / 100;
+                // Convert viewport width to pixels, with minimum sizes
+                const vwToPixels = (vw, dimension) => {
+                        const finalvw = (vw * window.innerWidth) / 100
+                        if (dimension == 'width' && finalvw < 160) {
+                                return 160
+                        } else if (dimension == 'height' && finalvw < 112) {
+                                return 112
+                        }
+                        return finalvw
                 };
 
-                const cardWidth = vwToPixels(20);
-                const cardHeight = vwToPixels(14);
+                const cardWidth = vwToPixels(20, 'width');
+                const cardHeight = vwToPixels(14, 'height');
 
+                // Class representing a wish card
                 class WishCard {
                         constructor(x, y, content) {
                                 let options = {
                                         frictionAir: 0.075,
                                         restitution: 0.25,
                                         density: 0.002,
-                                        angle: Math.random() * Math.PI * 2,
+                                        angle: Math.random() * 0.5 * Math.PI - (0.25* Math.PI), // Make all the cards render in upright
+                                        collisionFilter: {
+                                                group: -1, // Negative group means it will collide with boundaries but not with other cards
+                                        },
                                 };
 
+                                // Create the physical body for the card
                                 this.body = Bodies.rectangle(x, y, cardWidth, cardHeight, options);
                                 World.add(engine.world, this.body);
 
+                                // Create the visual representation of the card
                                 this.div = document.createElement("div");
                                 this.div.className = "wish-card";
                                 this.div.style.width = `${cardWidth}px`;
                                 this.div.style.height = `${cardHeight}px`;
                                 this.div.style.position = "absolute";
-                                this.div.style.backgroundColor = "white";
-                                this.div.style.padding = "2.2vw";
                                 this.div.style.boxSizing = "border-box";
                                 this.div.style.overflow = "hidden";
                                 this.div.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
                                 this.div.innerHTML = `
-                                        <div style="display: flex; flex-direction: column; height: 100%; gap: 0.5vw;">
-                                                <p style="font-size: 1.2vw; text-align: left;">Dear SP,</p>
-                                                <p style="font-size: 1.2vw; margin-bottom: 8px; text-align: left;">${content.message}</p>
-                                                <p style="font-size: 1.2vw; font-style: italic; text-align: right; flex: 1 0 0;">- ${content.author}</p>
+                                        <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 0.5vw;">
+                                                <p style="text-align: left; margin: 0;">Dear SP,</p>
+                                                <p style="margin: 0; text-align: left; flex-grow: 1; display: flex; align-items: center;">${content.message}</p>
+                                                <p style="font-style: italic; text-align: right; margin: 0;">- ${content.author}</p>
                                         </div>
                                 `;
                                 sceneRef.current.appendChild(this.div);
                         }
 
+                        // Update the position and rotation of the card's visual representation
                         update() {
                                 const halfWidth = cardWidth / 2;
                                 const halfHeight = cardHeight / 2;
                                 this.div.style.left = `${this.body.position.x - halfWidth}px`;
                                 this.div.style.top = `${this.body.position.y - halfHeight}px`;
                                 this.div.style.transform = `rotate(${this.body.angle}rad)`;
+                                this.div.style.zIndex = Math.floor(this.body.position.y);
                         }
                 }
 
+                // Create wish cards and add them to the scene
                 const createWishCards = () => {
                         wishCardsRef.current = []; // Clear existing cards
                         for (let i = 0; i < cardCount; i++) {
@@ -92,6 +111,7 @@ const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
                         }
                 };
 
+                // Add boundaries to the physics world
                 const addBoundaries = () => {
                         const thickness = 50;
                         World.add(engine.world, [
@@ -102,13 +122,16 @@ const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
                         ]);
                 };
 
+                // Initialize the physics world and rendering
                 const init = () => {
                         try {
+                                // Create the physics engine
                                 engine = Engine.create({
                                         gravity: { x: 0, y: 0 }
                                 });
                                 engineRef.current = engine;
 
+                                // Create the renderer
                                 render = Render.create({
                                         element: sceneRef.current,
                                         engine: engine,
@@ -126,6 +149,7 @@ const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
                                 addBoundaries();
                                 createWishCards();
 
+                                // Update card positions after each physics step
                                 Matter.Events.on(engine, 'afterUpdate', () => {
                                         wishCardsRef.current.forEach(card => card.update());
                                 });
@@ -138,17 +162,25 @@ const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
                                         const mouseX = event.clientX;
                                         const mouseY = event.clientY;
 
+                                        // Only apply force if mouse has moved significantly
                                         if (Math.hypot(mouseX - lastMouseX, mouseY - lastMouseY) > 10) {
                                                 lastMouseX = mouseX;
                                                 lastMouseY = mouseY;
 
                                                 wishCardsRef.current.forEach((card) => {
-                                                        if (Math.hypot(mouseX - card.body.position.x, mouseY - card.body.position.y) < 150) {
-                                                                const forceMagnitude = 3;
-                                                                Body.applyForce(card.body, card.body.position, {
-                                                                        x: (Math.random() - 0.5) * forceMagnitude,
-                                                                        y: (Math.random() - 0.5) * forceMagnitude,
-                                                                });
+                                                        const distance = Vector.magnitude(Vector.sub(card.body.position, { x: mouseX, y: mouseY }));
+                                                        if (distance < 150) {
+                                                                const forcePoint = { x: mouseX, y: mouseY };
+                                                                let magnitude = 1
+                                                                if (vwToPixels(20, 'height') > 500) {
+                                                                        magnitude = 5
+                                                                }
+                                                                const forceMagnitude = magnitude; // Strength of force applied by mouse
+                                                                const force = Vector.mult(
+                                                                        Vector.normalise(Vector.sub(card.body.position, forcePoint)),
+                                                                        forceMagnitude * (1 - distance / 150)
+                                                                );
+                                                                Body.applyForce(card.body, forcePoint, force);
                                                         }
                                                 });
                                         }
@@ -162,6 +194,7 @@ const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
 
                 init();
 
+                // Cleanup function
                 return () => {
                         if (render) {
                                 Render.stop(render);
@@ -174,14 +207,16 @@ const DynamicPhysicsDivs = ({ cardCount = 6 }) => {
                 };
         }, [cardCount]);
 
+        // Error handling
         if (error) {
                 return <div>Error: {error}</div>;
         }
 
+        // Render the component
         return (
                 <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
-                        <div className="header" style={{ position: 'absolute', zIndex: 1 }}>
-                                <h1>SP 70</h1>
+                        <div className="header" style={{ position: 'absolute', zIndex: cardCount + 1 }}>
+                                <h1>Wish SP a happy 70th Anniversary!</h1>
                         </div>
                         <div ref={sceneRef} style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }} />
                 </div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Fragment } from 'react'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import { Info } from 'lucide-react'
+import './timeline.css'
 
 import Image from 'next/image';
 
@@ -504,7 +505,6 @@ export default function Timeline() {
                         scrollTrigger: {
                                 trigger: line,
                                 start: "top bottom", // When the top of the trigger hits the bottom of the viewport
-                                pinSpacing: true,
                         },
                         height: '100%',
                         duration: 2.5,

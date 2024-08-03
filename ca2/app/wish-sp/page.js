@@ -7,7 +7,7 @@ import { Navbar } from "react-bootstrap";
 
 //component imports
 import { TransitionLink } from "../components/transitionLink";
-import PhysicsDivs from "../components/physicsItems";
+import PhysicsDivs from "../components/cards/physicsItems";
 
 //animation imports
 import gsap from "gsap";
@@ -46,6 +46,9 @@ export default function WishSP() {
                                         </div>
                                 </Nav> 
                         </Navbar>
+                        <div className="form-section">
+
+                        </div>
                         <PhysicsDivs />
                 </main>
         )

@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ReactLenis } from "lenis/react";
 import Minimap from "../components/minimap";
-import Timeline from "../components/timeline";
+import Timeline from "../components/timeline/timeline";
 import { useStateContext } from "../stateContext";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";

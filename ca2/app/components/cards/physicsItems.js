@@ -5,10 +5,10 @@ import dynamic from 'next/dynamic';
 
 const DynamicPhysicsDivs = dynamic(() => import('./dynamicPhysicsDivs'), {
   ssr: false,
-  loading: () => <p>Loading physics simulation...</p>
+  loading: () => <p>Loading...</p>
 });
 
-const PhysicsDivs = ({ cardCount = 12 }) => {
+const PhysicsDivs = ({ cardCount = 14 }) => {
   return <DynamicPhysicsDivs cardCount={cardCount} />;
 };
 

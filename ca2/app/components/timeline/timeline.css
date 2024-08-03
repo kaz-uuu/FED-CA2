@@ -1,0 +1,68 @@
+.gallery {
+        width: 70vw;
+        margin: auto;
+        position: relative;
+        padding-top: 10rem;
+        padding-left: 20vw;
+}
+    
+.mini-gallery {
+        width: 50vw;
+        margin: auto;
+        position: relative;
+        padding-top: 10rem;
+}
+
+
+.timeline {
+        display: grid;
+        grid-template-columns: min-content 1fr;
+        gap: 40px;
+        margin-bottom: 100px;
+}
+    
+.timeline p {
+        padding-top: 0.3rem;
+}
+    
+.timeline h1 {
+        padding-right: 20px;
+        z-index: 2;
+        position: relative;
+        height: 100%;
+}
+    
+.timeline-subtitle {
+        padding-bottom: 20px;
+        color: whitesmoke;
+}
+    
+.line-wrapper {
+        height: 100%;
+        width: 100%;
+}
+    
+.line {
+        width: 2px;
+        background-color: rgba(120, 120, 120, 1);
+        height: 0%;
+        display: block;
+        margin-left: 50%;
+}
+    
+.timeline-text-wrapper {
+        height: fit-content;
+        width: fit-content;
+        clip-path: polygon( 0 0, 100% 0, 100% 100%, 0% 100%);
+}
+    
+.timeline-text {
+        position: relative;
+        top: 100px;
+}
+    
+.timeline-heading {
+        position: relative;
+        bottom: 100px;
+}
+    
