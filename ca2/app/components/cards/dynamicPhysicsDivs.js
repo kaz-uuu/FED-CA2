@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
-import './dynamicPhysicsDivs.css';
+import './cards.css';
+
+//import components
+import CardForm from './cardForm';
 
 // Destructure required components from Matter.js
 const { Engine, Render, Runner, World, Bodies, Body, Vector } = Matter;
@@ -78,7 +81,7 @@ const DynamicPhysicsDivs = ({ cardCount }) => {
                                 this.div.style.position = "absolute";
                                 this.div.style.boxSizing = "border-box";
                                 this.div.style.overflow = "hidden";
-                                this.div.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+                                this.div.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2)";
                                 this.div.innerHTML = `
                                         <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 0.5vw;">
                                                 <p style="text-align: left; margin: 0;">Dear SP,</p>
@@ -214,12 +217,15 @@ const DynamicPhysicsDivs = ({ cardCount }) => {
 
         // Render the component
         return (
-                <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
-                        <div className="header" style={{ position: 'absolute', zIndex: cardCount + 1 }}>
-                                <h1>Wish SP a happy 70th Anniversary!</h1>
+                <>
+                        <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+                                <div className="header" style={{ position: 'absolute', zIndex: cardCount + 1 }}>
+                                        <h1 onClick={() => {}}>Click here to wish SP a happy 70th anniversary!</h1>
+                                </div>
+                                <div ref={sceneRef} style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }} />
                         </div>
-                        <div ref={sceneRef} style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }} />
-                </div>
+                        <CardForm />
+                </>
         );
 };
 

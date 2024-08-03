@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useStateContext } from "./stateContext";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
+import './index.css'
 
 // component imports
 import BookSequence from "./components/booksequence";

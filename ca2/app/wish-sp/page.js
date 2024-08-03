@@ -1,6 +1,7 @@
 "use client"
 import { useRef, useState } from "react";
 import { useStateContext } from "../stateContext";
+import './wish-sp.css'
 
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
@@ -46,9 +47,6 @@ export default function WishSP() {
                                         </div>
                                 </Nav> 
                         </Navbar>
-                        <div className="form-section">
-
-                        </div>
                         <PhysicsDivs />
                 </main>
         )
