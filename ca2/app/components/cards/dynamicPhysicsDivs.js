@@ -224,7 +224,7 @@ const DynamicPhysicsDivs = ({ cardCount }) => {
                                 </div>
                                 <div ref={sceneRef} style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }} />
                         </div>
-                        <CardForm />
+                        {/* <CardForm /> */}
                 </>
         );
 };

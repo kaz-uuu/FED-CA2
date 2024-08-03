@@ -16,9 +16,9 @@ const CardForm = ( trigger ) => {
         return (
                 <div className='form'>
                         <div className='card-container'>
-                                <select>
-                                        <option></option>
-                                </select>
+                               <p>Dear SP,</p>
+                               <input></input>
+                                -<input></input>
                         </div>
                 </div>
         
