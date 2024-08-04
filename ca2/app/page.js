@@ -9,6 +9,7 @@ import './index.css'
 // component imports
 import BookSequence from "./components/booksequence";
 import { TransitionLink } from "./components/transitionLink";
+import Marquee from "./components/marquee/marquee";
 
 // animation related imports
 import gsap from 'gsap';
@@ -33,15 +34,33 @@ export default function Home() {
         gsap.registerPlugin(useGSAP)
         gsap.registerPlugin(ScrollTrigger)
 
-        const { isFirstVisit } = useStateContext()
+        // const { isFirstVisit } = useStateContext()
         const mainRef = useRef()
         const horizontalContainer = useRef()
-        const origin = useRef()
-        const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
         const title = useRef() // create a reference to manipulate title in animations hook
-                
+        
+        const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
+        const [mobileLanding, setMobileLanding] = useState(false)
+
+        useEffect(() => {
+                const handleResize = () => {
+                        setMobileLanding(window.innerWidth < 800)
+                }
+        
+                // Set initial value
+                handleResize()
+        
+                // Add event listener
+                window.addEventListener('resize', handleResize)
+        
+                // Clean up
+                return () => window.removeEventListener('resize', handleResize)
+            }, [])
+
+
+
         useGSAP(() => {
-                if (isFirstVisit) {
+                // if (isFirstVisit) {
                         let tl = gsap.timeline({delay: 0})
                         tl.to(".col", {top: 0, duration: 3, ease: "power4.inOut"})
                         tl.to('.c-1 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=2')
@@ -51,36 +70,25 @@ export default function Home() {
                         tl.to('.c-5 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
                         tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
                         tl.to('.nav-link, .title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
-                        tl.to('.landing', {transform: 'scaleY(1)', duration: 0},'<')
-                } else {
-                        gsap.to('.nav-link', {top: 0, duration: 0})
-                        let tl = gsap.timeline({delay: 0})
-                        tl.to(".col", {top: 0, duration: 0})
-                        tl.to('.c-3 .item', {top: 0, duration: 0})
-                        tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
-                        tl.to('.title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
-                        tl.to('.landing', {transform: 'scaleY(1)', duration: 0},'<')
-                }
-
-                let scrollTween = gsap.to('.panel', {
-                        xPercent: -100, // Move the single section to the left by 100%
+                // } else {
+                //         gsap.to('.nav-link', {top: 0, duration: 0})
+                //         let tl = gsap.timeline({delay: 0})
+                //         tl.to(".col", {top: 0, duration: 0})
+                //         tl.to('.c-3 .item', {top: 0, duration: 0})
+                //         tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
+                //         tl.to('.title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
+                // }
+                let temp = 100 - 100*(window.innerWidth / horizontalContainer.current.offsetWidth)
+                let scrollTween = gsap.to('.horizontal-container', {
+                        xPercent: `-${temp}`, // Move the single section to the left by 100%
                         ease: "none", // Important as it keeps the scrolling motion linear
                         scrollTrigger: {
                                 trigger: ".horizontal-container",
                                 pin: true,
                                 scrub: 0.1,
-                                end: "+=5000"
+                                end: "+=3000"
                         }
                 });
-
-                gsap.to('.book-section', {
-                        xPercent: 100,
-                        ease: 'none',
-                        scrollTrigger: {
-                                containerAnimation: scrollTween,
-                                start: 'left left'
-                        }
-                })
 
                 // Exiting to SP in 70 page animation timeline
                 let SPin70ExitTl = gsap.timeline({ paused: true })
@@ -90,19 +98,7 @@ export default function Home() {
                 setSPin70ExitTl(SPin70ExitTl) // Timeline saved using useState hook to pass to the transition link component
         },{ scope: mainRef })
 
-        // useEffect(() => {
-        //         if (horizontalContainer && origin) {
-        //                 const { width } = origin.current.getBoundingClientRect()
-        //                 console.log('origin width: ', width)
-        //                 horizontalContainer.current.style.width =`${width}px`
-        //                 console.log(horizontalContainer.current.style.width)
-        //         }
-        // })
-
         
-
-
-
         return (
                 <main /*className={styles.main}*/ ref={ mainRef }>
                <Navbar>
@@ -128,19 +124,19 @@ export default function Home() {
                         <div className="item"><Image className="intro-img" src={oldSchoolImg} alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/></div>
                         <div className="item"><Image className="intro-img" src={spSignImg} alt="SP Singapore Polytechnic Student Life"/></div>
                         <div className="item"><Image className="intro-img" src={spSign2Img} alt="SP Singapore Polytechnic Student Life"/></div>
-                        <div className="item"><Image className="intro-img" src={chanChunSingImg} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/></div>
+                        <div className="item"><Image className="intro-img" src={chanChunSingImg} priority={true} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/></div>
                         </div>
                         <div className="col c-2">
                         <div className="item"><Image className="intro-img"  src={spCampusImg} alt="SP Singapore Polytechnic Campus"/></div>
                         <div className="item"><Image className="intro-img" src={princeEdwardRoadCampusImg} alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/></div>
                         <div className="item"><Image className="intro-img" src={spStudentsImg} alt="SP Singapore Polytechnic Student Life"/></div>
-                        <div className="item"><Image className="intro-img" src={spBusinessStudentsImg} alt="SP Singapore Polytechnic School of Business Student Life"/></div>
-                        <div className="item"><Image className="intro-img" src={spGradStudentsImg} alt="SP Singapore Polytechnic Students Graduation"/></div>
+                        <div className="item"><Image className="intro-img" src={spBusinessStudentsImg} priority={true} alt="SP Singapore Polytechnic School of Business Student Life"/></div>
+                        <div className="item"><Image className="intro-img" src={spGradStudentsImg} priority={true} alt="SP Singapore Polytechnic Students Graduation"/></div>
                         </div>
                         <div className="col c-3">
                         <div className="item"><Image className="intro-img"  src={spStudents2Img} alt="SP Singapore Polytechnic Student Life"/></div>
-                        <div className="item"><Image className="intro-img"  src={newSchoolImg} alt="SP Singapore Polytechnic Campus"/></div>
-                        <div className="item"><Image className="intro-img" src={chanChunSingImg} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/></div>
+                        <div className="item"><Image className="intro-img"  src={newSchoolImg} priority={true} alt="SP Singapore Polytechnic Campus"/></div>
+                        <div className="item">{mobileLanding ? <Image className="intro-img" src={spStudentsImg} alt="SP Singapore Polytechnic Student Life"/>  : <Image className="intro-img" src={chanChunSingImg} alt="SP Singapore Polytechnic For All Ages Chan Chun Sing"/>}</div>
                         <div className="item"><Image className="intro-img" src={spSignImg} alt="SP Singapore Polytechnic Student Life"/></div>
                         <div className="item"><Image className="intro-img" src={spSign2Img} alt="SP Singapore Polytechnic Student Life"/></div>
                         </div>
@@ -149,12 +145,12 @@ export default function Home() {
                         <div className="item"><Image className="intro-img" src={oldSchoolImg} alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/></div>
                         <div className="item"><Image className="intro-img" src={princeEdwardRoadCampusImg} alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/></div>
                         <div className="item"><Image className="intro-img" src={spStudentsImg} alt="SP Singapore Polytechnic Student Life"/></div>
-                        <div className="item"><Image className="intro-img" src={spBusinessStudentsImg} alt="SP Singapore Polytechnic School of Business Student Life"/></div>
+                        <div className="item"><Image className="intro-img" src={spBusinessStudentsImg} priority={true} alt="SP Singapore Polytechnic School of Business Student Life"/></div>
                         </div>
                         <div className="col c-5">
-                        <div className="item"><Image className="intro-img" src={spGradStudentsImg} alt="SP Singapore Polytechnic Students Graduation"/></div>
+                        <div className="item"><Image className="intro-img" src={spGradStudentsImg} priority={true} alt="SP Singapore Polytechnic Students Graduation"/></div>
                         <div className="item"><Image className="intro-img"  src={spStudents2Img} alt="SP Singapore Polytechnic Student Life"/></div>
-                        <div className="item"><Image className="intro-img"  src={newSchoolImg} alt="SP Singapore Polytechnic Campus"/></div>
+                        <div className="item"><Image className="intro-img"  src={newSchoolImg} priority={true} alt="SP Singapore Polytechnic Campus"/></div>
                         <div className="item"><Image className="intro-img" src={oldSchoolImg} alt="SP Singapore Polytechnic Old Campus, Prince Edward Road 1960s "/></div>
                         <div className="item"><Image className="intro-img" src={spSignImg} alt="SP Singapore Polytechnic Student Life"/></div>
                         </div>
@@ -162,10 +158,9 @@ export default function Home() {
                 <div className="title-wrapper"><h1 className="title" ref={title}>Celebrating 70 Years of <span className="titleSP">Singapore Polytechnic</span></h1></div>
                 <div className="hero">
                 </div>
-                <div className="content is-loading">
                         <div ref={horizontalContainer} className="horizontal-container">
-                                <div className="panel origin-panel">
-                                        <div ref={origin} className="origin">
+                                <div className="panel center-y">
+                                        <div className="grid">
                                                 <h2 className="description">What began in a humble five-storey building on Prince Edward Road grew into Singapore's largest polytechnic—a sprawling campus spanning 38 hectares of lush greenery and over 230,000 esteemed alumni. Our 70-year milestone in 2024 is a moment of reflection and celebration, but also the beginning of our next era, with more to discover and more to accomplish. This is SP at 70.</h2>
                                                 <div className="img-column">
                                                         <div className="img-wrapper-1">
@@ -175,8 +170,13 @@ export default function Home() {
                                                                 <Image className="school-img" fill src={spCampusImg} objectFit="cover" alt="SP Singapore Polytechnic Campus"/>
                                                         </div>
                                                 </div>
-                                                <h1 className="rotated">FUTURE READY  SP</h1>
+                                                <h1 className="rotated book-title">FOR ALL AGES</h1>
+                                        </div>
+                                        <BookSequence />
 
+                                        <div className="grid-2">
+                                                <h1 className="book-desc">In celebration of SP's 70th anniversary, we have launched a commemorative book titled ‘For All Ages, Singapore Polytechnic At Seventy’, featuring some of the people and moments that have shaped us through the years.</h1>
+                                                <h1 className="rotated">FUTURE READY  SP</h1>
                                                 <div className="section">
                                                         <h1>Personal/Work Life</h1>
                                                         {/* <div className="img-wrapper-3">
@@ -205,19 +205,8 @@ export default function Home() {
                                                         </p>
                                                 </div>
                                         </div>
-                                        <div className="book-section">
-                                                <div className="book-desc">
-                                                        <h1 className="rotated book-title">FOR ALL AGES</h1>
-                                                        <h1 className="desc-text">In celebration of SP's 70th anniversary, we have launched a commemorative book titled ‘For All Ages, Singapore Polytechnic At Seventy’, featuring some of the people and moments that have shaped us through the years.</h1>
-                                                        <div className="spacer"></div>
-                                                </div>
-                                                <BookSequence className='book-sequence' />
-                                        </div>
                                 </div>
                         </div>
-                        <div className="vertical-container">
-                        </div>
-                </div>
                 <div className="transition-element"></div>
                 </main>
         );

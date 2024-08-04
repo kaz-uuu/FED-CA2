@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Matter from 'matter-js';
 import './cards.css';
 
@@ -8,23 +8,25 @@ import CardForm from './cardForm';
 // Destructure required components from Matter.js
 const { Engine, Render, Runner, World, Bodies, Body, Vector } = Matter;
 
-// Array of wish messages and authors
-const wishMessages = [
-        { message: "Congratulations on 70 years of excellence!", author: "Kun Ming" },
-        { message: "Here's to 70 more years of innovation!", author: "Jane" },
-        { message: "SP has shaped generations. Happy 70th!", author: "Alex" },
-        { message: "Proud to be part of SP's legacy!", author: "Sarah" },
-        { message: "70 years of creating future-ready graduates!", author: "Mike" },
-        { message: "SP: Where passion meets purpose for 70 years!", author: "Emily" },
-        { message: "Celebrating 70 years of transforming lives!", author: "David" },
-        { message: "SP: 70 years young and still innovating!", author: "Rachel" },
-        { message: "Happy 70th! Thanks for the memories!", author: "Kevin" },
-        { message: "70 years of excellence, community, and growth!", author: "Lisa" },
-        { message: "Cheers to SP's platinum anniversary!", author: "Tom" },
-        { message: "I hope SP continues to survive!", author: "Irman" },
-        { message: "I hope SP will achieve all their goals and renovate SOC block", author: "Oliver" },
-        { message: "I wish SP would open an exclusive shuttle bus service for SOC students!", author: "Javier" },
+// Array of initial wish messages and names
+const initialWishMessages = [
+        { message: "Congratulations on 70 years of excellence!", name: "Kun Ming" },
+        { message: "Here's to 70 more years of innovation!", name: "Jane" },
+        { message: "SP has shaped generations. Happy 70th!", name: "Alex" },
+        { message: "Proud to be part of SP's legacy!", name: "Sarah" },
+        { message: "70 years of creating future-ready graduates!", name: "Mike" },
+        { message: "SP: Where passion meets purpose for 70 years!", name: "Emily" },
+        { message: "Celebrating 70 years of transforming lives!", name: "David" },
+        { message: "SP: 70 years young and still innovating!", name: "Rachel" },
+        { message: "Happy 70th! Thanks for the memories!", name: "Kevin" },
+        { message: "70 years of excellence, community, and growth!", name: "Lisa" },
+        { message: "Cheers to SP's platinum anniversary!", name: "Tom" },
+        { message: "I hope SP continues to survive!", name: "Irman" },
+        { message: "I hope SP will achieve all their goals and renovate SOC block", name: "Oliver" },
+        { message: "I wish SP would open an exclusive shuttle bus service for SOC students!", name: "Javier" },
 ];
+
+const STORAGE_KEY = 'savedCards';
 
 // Main component
 const DynamicPhysicsDivs = ({ cardCount }) => {
@@ -34,6 +36,30 @@ const DynamicPhysicsDivs = ({ cardCount }) => {
         const renderRef = useRef(null);
         const wishCardsRef = useRef([]);
         const [error, setError] = useState(null);
+        const [formActive, setFormActive] = useState(false);
+        const [wishMessages, setWishMessages] = useState(initialWishMessages);
+
+        const loadCardsFromStorage = useCallback(() => {
+                const savedCardsData = localStorage.getItem(STORAGE_KEY);
+                if (savedCardsData) {
+                        const savedCards = JSON.parse(savedCardsData);
+                        setWishMessages(prevMessages => [...prevMessages, ...savedCards]);
+                }
+        }, []);
+
+        const addNewCard = useCallback((newCard) => {
+                setWishMessages(prevMessages => [...prevMessages, newCard]);
+                
+                // Update localStorage
+                const savedCardsData = localStorage.getItem(STORAGE_KEY);
+                const savedCards = savedCardsData ? JSON.parse(savedCardsData) : [];
+                savedCards.push(newCard);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedCards));
+        }, []);
+
+        useEffect(() => {
+                loadCardsFromStorage();
+        }, [loadCardsFromStorage]);
 
         useEffect(() => {
                 if (typeof window === 'undefined') return; // Guard for SSR
@@ -86,7 +112,7 @@ const DynamicPhysicsDivs = ({ cardCount }) => {
                                         <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 0.5vw;">
                                                 <p style="text-align: left; margin: 0;">Dear SP,</p>
                                                 <p style="margin: 0; text-align: left; flex-grow: 1; display: flex; align-items: center;">${content.message}</p>
-                                                <p style="font-style: italic; text-align: right; margin: 0;">- ${content.author}</p>
+                                                <p style="font-style: italic; text-align: right; margin: 0;">- ${content.name}</p>
                                         </div>
                                 `;
                                 sceneRef.current.appendChild(this.div);
@@ -208,7 +234,7 @@ const DynamicPhysicsDivs = ({ cardCount }) => {
                                 wishCardsRef.current.forEach(card => card.div.remove());
                         }
                 };
-        }, [cardCount]);
+        }, [cardCount, wishMessages]); // Add wishMessages as a dependency
 
         // Error handling
         if (error) {
@@ -220,11 +246,11 @@ const DynamicPhysicsDivs = ({ cardCount }) => {
                 <>
                         <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
                                 <div className="header" style={{ position: 'absolute', zIndex: cardCount + 1 }}>
-                                        <h1 onClick={() => {}}>Click here to wish SP a happy 70th anniversary!</h1>
+                                        <h1 onClick={() => setFormActive(true)}>Click here to wish SP a happy 70th anniversary!</h1>
                                 </div>
                                 <div ref={sceneRef} style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }} />
                         </div>
-                        {/* <CardForm /> */}
+                        <CardForm state={formActive} hook={setFormActive} addNewCard={addNewCard}/>
                 </>
         );
 };

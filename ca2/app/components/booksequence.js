@@ -1,64 +1,64 @@
 import { useEffect, useRef } from 'react';
 
 const BookSequence = () => {
-        const canvasRef = useRef(null);
-        const imgRef = useRef(null);
-        const frameCount = 189;
+    const canvasRef = useRef(null);
+    const imgRef = useRef(null);
+    const frameCount = 189;
 
-        const currentFrame = (index) => (
-                `/images/book sequence/${index.toString().padStart(4, '0')}.png`
-        );
+    const currentFrame = (index) => (
+        `/images/book sequence/${index.toString().padStart(4, '0')}.png`
+    );
 
-        useEffect(() => {
-                const canvas = canvasRef.current;
-                const context = canvas.getContext('2d');
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        const img = new Image();
+        imgRef.current = img;
+
+        canvas.width = 600;
+        canvas.height = 600;
+
+        const preloadImages = () => {
+            for (let i = 1; i < frameCount; i++) {
                 const img = new Image();
-                imgRef.current = img
+                img.src = currentFrame(i);
+            }
+        };
 
-                canvas.width = 600;
-                canvas.height = 600;
+        img.src = currentFrame(1);
+        img.onload = () => {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, 0, 0);
+        };
 
-                const preloadImages = () => {
-                for (let i = 1; i < frameCount; i++) {
-                        const img = new Image();
-                        img.src = currentFrame(i);
-                }
-                };
+        const updateImage = (index) => {
+            img.src = currentFrame(index);
+            context.drawImage(img, 0, 0);
+        };
 
-                img.src = currentFrame(1);
-                img.onload = () => {
-                        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-                        context.drawImage(img, 0, 0);
-                };
+        const onScroll = () => {
+            const scrollTop = window.pageYOffset;
+            const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollFraction = scrollTop / maxScrollTop;
+            const frameIndex = Math.min(
+                frameCount - 1,
+                Math.ceil(scrollFraction * frameCount)
+            );
 
-                const updateImage = (index) => {
-                        img.src = currentFrame(index);
-                        context.drawImage(img, 0, 0);
-                };
+            requestAnimationFrame(() => updateImage(frameIndex + 1));
+        };
 
-                const onScroll = () => {
-                        const scrollTop = document.documentElement.scrollTop;
-                        const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-                        const scrollFraction = scrollTop / maxScrollTop;
-                        const frameIndex = Math.min(
-                                frameCount - 1,
-                                Math.ceil(scrollFraction * frameCount)
-                        );
+        window.addEventListener('scroll', onScroll);
+        preloadImages();
 
-                        requestAnimationFrame(() => updateImage(frameIndex + 1));
-                };
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, [frameCount]);
 
-                window.addEventListener('scroll', onScroll);
-                preloadImages();
-
-                return () => {
-                        window.removeEventListener('scroll', onScroll);
-                };
-        }, [frameCount]);
-
-        return (
+    return (
         <canvas id="book-sequence" ref={canvasRef}></canvas>
-        );
+    );
 };
 
 export default BookSequence;

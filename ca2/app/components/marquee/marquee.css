@@ -1,0 +1,34 @@
+.marquee-container {
+        margin-left: 5%;
+        width: 30%;
+        overflow: hidden;
+      }
+      
+.marquee-content {
+        display: inline-block;
+        white-space: nowrap;
+        animation: marquee 10s linear infinite;
+}
+      
+.marquee-content span {
+        display: inline-block;
+        font-size: clamp(16px, 3vw, 40px); /* Responsive font size */
+        font-weight: bold;
+        padding: 0 1vw;
+}
+      
+      @keyframes marquee {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(-50%, 0);
+        }
+      }
+      
+      /* Adjust animation speed for smaller screens */
+      @media (max-width: 768px) {
+        .marquee-content {
+          animation: marquee 10s linear infinite;
+        }
+      }

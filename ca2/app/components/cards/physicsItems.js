@@ -8,7 +8,7 @@ const DynamicPhysicsDivs = dynamic(() => import('./dynamicPhysicsDivs'), {
   loading: () => <p>Loading...</p>
 });
 
-const PhysicsDivs = ({ cardCount = 14 }) => {
+const PhysicsDivs = ({ cardCount = 15 }) => {
   return <DynamicPhysicsDivs cardCount={cardCount} />;
 };
 
