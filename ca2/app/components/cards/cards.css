@@ -112,7 +112,7 @@ input:focus, textarea:focus {
         padding: max(15px, 2.2vw);
 }
 
-.grid {
+.form-grid {
         display: grid;
         grid-template-columns: auto 1fr;
         width: 100%;

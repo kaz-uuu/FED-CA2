@@ -220,7 +220,7 @@ const CardForm = ({ state, hook, addNewCard }) => {
                         <div ref={containerRef} className='container'>
                                 <button className='exit-button' onClick={() => hook(false)}>Esc</button>
                                 <div ref={nameContainerRef} className='name-container'>
-                                        <div className='grid'>
+                                        <div className='form-grid'>
                                                 <h1>1. Enter Name</h1>
                                                 <div className='input-wrapper'>
                                                         <input
@@ -246,7 +246,7 @@ const CardForm = ({ state, hook, addNewCard }) => {
                                 </div>
 
                                 <div ref={messageContainerRef} className='message-container'>
-                                        <div className='grid'>
+                                        <div className='form-grid'>
                                                 <h1>2. Enter Message</h1>
                                                 <div className='input-wrapper'>
                                                         <textarea
