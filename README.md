@@ -1,3 +1,12 @@
+## Running
+
+After cloning, navigate to the root FED-CA2 and run
+```
+cd ca2
+npm i
+npm run dev
+```
+
 
 ## Directory
 
