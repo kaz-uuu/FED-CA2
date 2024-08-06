@@ -122,13 +122,13 @@ const CardForm = ({ state, hook, addNewCard }) => {
         
         useEffect(() => {
                 const handleKeyDown = (event) => {
-                        if (document.activeElement === inputRef.current || document.activeElement === textAreaRef.current) {
-                                if (event.key === 'Enter' && namePressed) {
-                                        handleMessageEnter()
-                                } else if (event.key === 'Enter') {
-                                        handleNameEnter()
-                                }
-                        }
+                        // if (document.activeElement === inputRef.current || document.activeElement === textAreaRef.current) {
+                        //         if (event.key === 'Enter' && namePressed) {
+                        //                 handleMessageEnter()
+                        //         } else if (event.key === 'Enter') {
+                        //                 handleNameEnter()
+                        //         }
+                        // }
                         if (event.key === 'Enter' && namePressed && messagePressed) {
                                 handleReturn()
                         } else if (event.key === 'Escape') {
