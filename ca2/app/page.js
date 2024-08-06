@@ -160,6 +160,7 @@ export default function Home() {
                 </div>
                         <div ref={horizontalContainer} className="horizontal-container">
                                 <div className="panel center-y">
+                                        <BookSequence />
                                         <div className="grid">
                                                 <h2 className="description">What began in a humble five-storey building on Prince Edward Road grew into Singapore's largest polytechnic—a sprawling campus spanning 38 hectares of lush greenery and over 230,000 esteemed alumni. Our 70-year milestone in 2024 is a moment of reflection and celebration, but also the beginning of our next era, with more to discover and more to accomplish. This is SP at 70.</h2>
                                                 <div className="img-column">
@@ -171,10 +172,7 @@ export default function Home() {
                                                         </div>
                                                 </div>
                                                 <h1 className="rotated book-title">FOR ALL AGES</h1>
-                                        </div>
-                                        <BookSequence />
-
-                                        <div className="grid-2">
+                                                <div></div>
                                                 <h1 className="book-desc">In celebration of SP's 70th anniversary, we have launched a commemorative book titled ‘For All Ages, Singapore Polytechnic At Seventy’, featuring some of the people and moments that have shaped us through the years.</h1>
                                                 <h1 className="rotated">FUTURE READY  SP</h1>
                                                 <div className="section">

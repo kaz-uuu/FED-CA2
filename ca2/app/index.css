@@ -34,20 +34,13 @@
 }
 
 
+
 .grid {
     display: grid !important; 
-    grid-template-columns: 50vw 30vw 10vw !important;
+    grid-template-columns: 50vw 30vw 10vw 40vw 40vw 5vw min(500px, 100vw) min(500px, 100vw) min(500px, 100vw) !important;
     gap: 40px !important;
     padding-left: 10vh !important;
     align-items: center !important;
-}
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: min(400px, 50vw) 5vw min(500px, 100vw) min(500px, 100vw) min(500px, 100vw);
-    gap: 40px;
-    align-items: center;
-    padding-right: 10vw;
 }
 
 .hero {
@@ -107,6 +100,7 @@
 
 .book-desc {
     font-size: clamp(16px, 2.5vw, 50px);
+    font-weight: 400;
 }
 
 .section {
@@ -150,7 +144,8 @@
 /* Book Sequence */
 
 #book-sequence {
-        position: relative;
+        position: absolute;
+        left: calc(90vw + (0.5*clamp(310px, 50vw, 600px)));
         margin: auto;
         height: clamp(310px, 50vw, 600px);
 }
