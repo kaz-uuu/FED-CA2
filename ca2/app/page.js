@@ -78,7 +78,7 @@ export default function Home() {
                 //         tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
                 //         tl.to('.title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
                 // }
-                let temp = 95 - 100*(window.innerWidth / horizontalContainer.current.offsetWidth)
+                let temp = 100 - 100*(window.innerWidth / horizontalContainer.current.offsetWidth)
                 let scrollTween = gsap.to('.horizontal-container', {
                         xPercent: `-${temp}`, // Move the single section to the left by 100%
                         ease: "none", // Important as it keeps the scrolling motion linear
