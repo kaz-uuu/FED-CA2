@@ -152,6 +152,7 @@ input:focus, textarea:focus {
         font-size: 14px;
         cursor: pointer;
         font-family: "Sohne";
+        z-index: 4;
 }
 
 .success-container {
