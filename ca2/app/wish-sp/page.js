@@ -18,6 +18,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 export default function WishSP() {
         const mainRef  = useRef()
         const { isFirstVisit } = useStateContext()
+        const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
 
         useGSAP(() => {
                 if (isFirstVisit) {
@@ -25,7 +26,13 @@ export default function WishSP() {
                 } else {
                     gsap.to('.nav-link', {top: 0, duration: 0})
                 }
-                let exitTl = gsap.timeline({delay: 0, paused: true})
+
+                // Exiting to SP in 70 page animation timeline
+                let SPin70ExitTl = gsap.timeline({ paused: true })
+                SPin70ExitTl.to('.transition-element', {width: '100vw', duration: 1, ease: 'power4.out'})
+                SPin70ExitTl.to('.wish-sp-link', {opacity: 0.6, duration: 0.1, ease: 'power4.out'}, "<")
+                SPin70ExitTl.to('.sp-in-70-link', {opacity: 1, duration: 0.3, ease: 'power4.out'},"<")
+                setSPin70ExitTl(SPin70ExitTl) // Timeline saved using useState hook to pass to the transition link component
             },{ scope: mainRef })
 
         return (
@@ -38,7 +45,7 @@ export default function WishSP() {
                                         </Nav>
                                         <Nav>
                                         <div className="nav-item">
-                                                <TransitionLink href={'/sp-in-70'}  destination="sp-in-70-link">SP in 70</TransitionLink>
+                                                <TransitionLink href={'/sp-in-70'}  destination="sp-in-70-link" timeline={SPin70ExitTl}>SP in 70</TransitionLink>
                                         </div>
                                         </Nav>
                                         <Nav>
