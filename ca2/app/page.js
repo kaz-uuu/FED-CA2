@@ -34,12 +34,14 @@ export default function Home() {
         gsap.registerPlugin(useGSAP)
         gsap.registerPlugin(ScrollTrigger)
 
-        // const { isFirstVisit } = useStateContext()
+        const { isFirstVisit } = useStateContext()
         const mainRef = useRef()
         const horizontalContainer = useRef()
         const title = useRef() // create a reference to manipulate title in animations hook
         
         const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
+        const [WishSPExitTl, setWishSPExitTl] = useState(null)
+
         const [mobileLanding, setMobileLanding] = useState(false)
 
         useEffect(() => {
@@ -60,7 +62,7 @@ export default function Home() {
 
 
         useGSAP(() => {
-                // if (isFirstVisit) {
+                if (isFirstVisit) {
                         let tl = gsap.timeline({delay: 0})
                         tl.to(".col", {top: 0, duration: 3, ease: "power4.inOut"})
                         tl.to('.c-1 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=2')
@@ -70,14 +72,14 @@ export default function Home() {
                         tl.to('.c-5 .item', {top: 0, stagger: 0.25, duration: 3, ease: 'power4.inOut'}, '-=4')
                         tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
                         tl.to('.nav-link, .title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
-                // } else {
-                //         gsap.to('.nav-link', {top: 0, duration: 0})
-                //         let tl = gsap.timeline({delay: 0})
-                //         tl.to(".col", {top: 0, duration: 0})
-                //         tl.to('.c-3 .item', {top: 0, duration: 0})
-                //         tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
-                //         tl.to('.title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
-                // }
+                } else {
+                        gsap.to('.nav-link', {top: 0, duration: 0})
+                        let tl = gsap.timeline({delay: 0})
+                        tl.to(".col", {top: 0, duration: 0})
+                        tl.to('.c-3 .item', {top: 0, duration: 0})
+                        tl.to('.wrapper', {scale: 6, duration: 4, ease: 'power4.inOut'},'-=2')
+                        tl.to('.title', {top: 0, stagger: 0.075, duration: 1, ease: 'power3.out'},"-=1.5")
+                }
                 let temp = 100 - 100*(window.innerWidth / horizontalContainer.current.offsetWidth)
                 let scrollTween = gsap.to('.horizontal-container', {
                         xPercent: `-${temp}`, // Move the single section to the left by 100%
@@ -96,6 +98,13 @@ export default function Home() {
                 SPin70ExitTl.to('.home-link', {opacity: 0.6, duration: 0.1, ease: 'power4.out'}, "<")
                 SPin70ExitTl.to('.sp-in-70-link', {opacity: 1, duration: 0.3, ease: 'power4.out'},"<")
                 setSPin70ExitTl(SPin70ExitTl) // Timeline saved using useState hook to pass to the transition link component
+
+                // Exiting to Wish SP page animation timeline
+                let WishSPExitTl = gsap.timeline({ paused: true })
+                WishSPExitTl.to('.transition-element', {width: '100vw', duration: 1, ease: 'power4.out'})
+                WishSPExitTl.to('.home-link', {opacity: 0.6, duration: 0.1, ease: 'power4.out'}, "<")
+                WishSPExitTl.to('.wish-sp-link', {opacity: 1, duration: 0.3, ease: 'power4.out'},"<")
+                setWishSPExitTl(WishSPExitTl) // Timeline saved using useState hook to pass to the transition link component
         },{ scope: mainRef })
 
         
@@ -114,7 +123,7 @@ export default function Home() {
                         </Nav>
                         <Nav>
                         <div className="nav-item">
-                                <TransitionLink href={'/wish-sp'}  destination="wish-sp-link">Wish SP</TransitionLink>
+                                <TransitionLink href={'/wish-sp'}  destination="wish-sp-link" timeline={WishSPExitTl}>Wish SP</TransitionLink>
                         </div>
                         </Nav> 
                 </Navbar>
