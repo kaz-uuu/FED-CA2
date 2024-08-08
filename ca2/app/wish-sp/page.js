@@ -19,6 +19,7 @@ export default function WishSP() {
         const mainRef  = useRef()
         const { isFirstVisit } = useStateContext()
         const [SPin70ExitTl, setSPin70ExitTl] = useState(null)
+        const [homeExitTl, setHomeExitTl] = useState(null)
 
         useGSAP(() => {
                 if (isFirstVisit) {
@@ -52,9 +53,18 @@ export default function WishSP() {
                                         <div className="nav-item">
                                                 <TransitionLink href={'/wish-sp'} id='active'  destination="wish-sp-link">Wish SP</TransitionLink>
                                         </div>
-                                </Nav> 
+                                </Nav>
                         </Navbar>
                         <PhysicsDivs />
+                        {/* <div className="transition-div">
+                                <div className="background-white">
+                                        <h1>SP 70</h1>
+                                        <h1>SP 70</h1>
+                                </div>
+                                <div className="background-red"></div>
+                                <div className="background-gray"></div>
+                                
+                        </div> */}
                 </main>
         )
 }

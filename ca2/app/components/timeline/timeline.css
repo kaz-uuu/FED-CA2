@@ -17,7 +17,7 @@
 .timeline {
         display: grid;
         grid-template-columns: min-content 1fr;
-        gap: 40px;
+        gap: min(40px, 1vw);
         margin-bottom: 100px;
 }
     
